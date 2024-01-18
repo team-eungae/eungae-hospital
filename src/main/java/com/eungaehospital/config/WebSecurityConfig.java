@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Configuration
 public class WebSecurityConfig {
+
 	private final HospitalUserDetailsService hospitalUserDetailsService;
 
 	// 시큐리티 비활성화
@@ -43,14 +44,14 @@ public class WebSecurityConfig {
 			.authorizeHttpRequests(authorizationRequests -> authorizationRequests
 				.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
 				.requestMatchers(new MvcRequestMatcher(introspector, "/")).permitAll()
-				.anyRequest().permitAll()
+				.anyRequest().authenticated()
 			)
 			.formLogin(login -> login
-				.loginPage("/login")
+				.loginPage("/")
 				.loginProcessingUrl("/login-proc")
-				.usernameParameter("email")
+				.usernameParameter("hospitalId")
 				.passwordParameter("password")
-				.defaultSuccessUrl("/")
+				.defaultSuccessUrl("/main")
 				.failureUrl("/login/error"))
 			.logout(logout -> logout
 				.logoutUrl("/logout")
