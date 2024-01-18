@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+main {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+.hospital-schedule-title {
+    text-align: center;
+    padding: 0 1.5rem;
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 1.8rem;
+    vertical-align: middle;
+}
+
+.hospital-schedule-guide {
+    font-size: 12px;
+    text-align: center;
+}
+
+.ex {
+    color: #326eb3;
+}
+
+.hospital-schedule-table {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+    margin-bottom: 3em;
+}
+
+table {
+    border: 1px solid #d0d0d0;
+    width: 80%;
+    text-align: center;
+    border-spacing: 30px;
+}
+
+tr {
+    padding-right: 1em;
+}
+
+th {
+    font-size: 18px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+td {
+    height: 3em;
+}
+
+.sat {
+    color: blue;
+}
+
+.sun {
+    color: red;
+}
+
+.open-title,
+.close-title {
+    padding-left: 30px;
+}
+
+td > input {
+    border: 0;
+    width: 70%;
+    text-align: center;
+}
+.hospital-lunch-title {
+    text-align: center;
+    padding: 0 1.5rem;
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 1.8rem;
+    vertical-align: middle;
+}
+
+.hospital-lunch {
+    display: flex;
+    justify-content: center;
+}
+
+.hospital-lunch input {
+    width: 100px;
+    height: 2em;
+    text-align: center;
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+}
+
+.lunch-start,
+.lunch-end {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.hospital-schedule-save {
+    margin-top: 2em;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.save {
+    background: #326eb3;
+    color: white;
+    border: none;
+    width: 120px;
+    font-size: 18px;
+    padding: 0.5rem;
+    border-radius: 11px;
+    display: inline-block;
+}
