@@ -80,23 +80,17 @@
             </div>
             <div class="hospital-update-content">
                 <div class="hospital-update-sub__title col-3">
-                    병원 대표 이미지
+                    병원 이미지
                 </div>
-                <div class="hospital-update__input col">
-                    <div class="insert">
-                        <form
-                                method="POST"
-                                onsubmit="return false;"
-                                enctype="multipart/form-data"
-                        >
-                            <input
-                                    type="file"
-                                    id="hospitalImage"
-                                    onchange="addFile(this);"
-                                    multiple
-                            />
-                            <div class="file-list"></div>
-                        </form>
+                <div class="hospital-update__input col main-image">
+                    <div class="hospital-main-image">
+                        <img src="/img/hospital.jpg">
+                    </div>
+                    <div class="hospital-main-image">
+                        <img src="/img/doctor.jpeg">
+                    </div>
+                    <div class="hospital-main-image">
+                        <img src="/img/hospital.jpg">
                     </div>
                 </div>
             </div>
