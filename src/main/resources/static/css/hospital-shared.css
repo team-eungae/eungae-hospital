@@ -8,6 +8,7 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     color: #333;
     margin: 0;
+    padding: 1.5em
 }
 
 p {
@@ -70,6 +71,16 @@ main {
 
 .dropdown-content a:hover {
     background-color: #f1f1f1;
+}
+
+
+.dropdown-content a:link{
+    text-decoration: none;
+    color: inherit;
+}
+.dropdown-content a:visited {
+    text-decoration: none;
+    color: inherit;
 }
 
 .dropdown:hover .dropdown-content {
