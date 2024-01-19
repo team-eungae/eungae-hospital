@@ -8,7 +8,7 @@
 <header th:fragment="hospital-navbar"
         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <div class="col-md-7 mb-2 mb-md-0">
-        <a th:href="@{/main}" class="d-inline-flex link-body-emphasis text-decoration-none">
+        <a th:href="@{/hospital/main}" class="d-inline-flex link-body-emphasis text-decoration-none">
             <img class="hospital-logo" src="/img/logo4.png" alt="EUNGAE LOGO">
         </a>
     </div>
@@ -17,16 +17,16 @@
         <div class="dropdown">
             <button class="dropbtn">병원정보</button>
             <div class="dropdown-content">
-                <a th:href="@{/hospital/form}">병원 상세</a>
+                <a th:href="@{/hospital/profile}">병원 상세</a>
                 <a th:href="@{/hospital/schedule}">병원 휴무일</a>
             </div>
         </div>
         <div class="dropdown">
             <button class="dropbtn">의사정보</button>
             <div class="dropdown-content">
-                <a href="#">의사 상세</a>
-                <a th:href="@{/doctor/form}">의사 수정</a>
-                <a href="#">의사 등록</a>
+                <a th:href="@{/hospital/doctors/}">의사 상세</a>
+                <a th:href="@{/hospital/doctors/{doctorSeq}/form}">의사 수정</a>
+                <a th:href="@{/hospital/doctors/form}">의사 등록</a>
             </div>
         </div>
         <div class="dropdown">

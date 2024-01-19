@@ -3,8 +3,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/hosptial_main_layout}">
 <th:block layout:fragment="hospital_custom_header">
-    <link rel="stylesheet" href="/css/hospital-schedule.css">
-    <title>응애 - 병원 스케쥴</title>
+    <link rel="stylesheet" href="/css/hospital-schedule-update.css">
+    <title>응애 - 병원 스케쥴 수정</title>
 </th:block>
 
 <body>
@@ -38,23 +38,23 @@
             <tbody>
             <tr>
                 <td class="open-title">OPEN</td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="" disabled /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
             </tr>
             <tr>
                 <td class="close-title">CLOSE</td>
-                <td><input type="text" value="1830" disabled/></td>
-                <td><input type="text" value="1830" disabled/></td>
-                <td><input type="text" value="2000" disabled/></td>
-                <td><input type="text" value="1830" disabled/></td>
-                <td><input type="text" value="1830" disabled/></td>
-                <td><input type="text" value="1400" disabled/></td>
-                <td><input type="text" value="" disabled/></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
             </tr>
             </tbody>
         </table>
@@ -67,12 +67,12 @@
         <div class="hospital-lunch">
             <p class="lunch-start">
                 시작
-                <input type="text" value="1300" disabled/>
+                <input type="text" />
             </p>
 
             <p class="lunch-end">
                 종료
-                <input type="text" value="1400" disabled/>
+                <input type="text" />
             </p>
         </div>
     </div>
@@ -83,7 +83,7 @@
                 class="my-page-content save"
                 onclick="updateMemberInfo()"
         >
-            <a th:href="@{/hospital/schedule/form}">수정하기</a>
+            저장하기
         </button>
     </div>
 </main>

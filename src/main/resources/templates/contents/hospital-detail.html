@@ -4,27 +4,21 @@
       layout:decorate="~{layout/hosptial_main_layout}">
 <th:block layout:fragment="hospital_custom_header">
     <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <link rel="stylesheet" href="/css/hospital-update.css">
-    <title>응애 - 병원 상세 수정</title>
+    <link rel="stylesheet" href="/css/hospital-detail.css">
+    <title>응애 - 병원 상세</title>
 </th:block>
 
 <body>
-<main layout:fragment="hospital_content">
+<main layout:fragment="hospital_content" method="get">
     <form class="hospital-update-form">
-        <p class="hospital-update-title">병원 정보 수정</p>
+        <p class="hospital-update-title">우리 병원 정보</p>
         <div class="hospital-update">
             <div class="hospital-update-content">
                 <div class="hospital-update-sub__title col-3">
                     병원 ID
                 </div>
                 <div class="hospital-update__input col">
-                    <input
-                            type="text"
-                            id="hospitalId"
-                            name="hospitalId"
-                            value="aX2237ybE"
-                            disabled
-                    />
+                    <input type="text" id="hospitalId" name="hospitalId" value="병원아이디" disabled>
                 </div>
             </div>
             <div class="hospital-update-content">
@@ -32,13 +26,7 @@
                     병원 이름
                 </div>
                 <div class="hospital-update__input col">
-                    <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value="새움소아과"
-                            required
-                    />
+                    <input type="text" id="name" name="name" value="새움병원" disabled>
                 </div>
             </div>
             <div class="hospital-update-content">
@@ -46,13 +34,7 @@
                     병원 연락처
                 </div>
                 <div class="hospital-update__input col">
-                    <input
-                            type="text"
-                            id="contact"
-                            name="contact"
-                            value="02-123-123"
-                            required
-                    />
+                    <input type="text" id="contact" name="contact" value="010-1234-1234" disabled>
                 </div>
             </div>
             <div class="hospital-update-content">
@@ -60,16 +42,9 @@
                     한 줄 소개
                 </div>
                 <div class="hospital-update__input col">
-                    <input
-                            type="text"
-                            id="notice"
-                            name="notice"
-                            value="설연휴 기간에 병원 문 안엽니다."
-                            required
-                    />
+                    <input type="text" id="notice" name="notice" value="설에 쉽니다" disabled>
                 </div>
             </div>
-
 
 
             <div class="hospital-update-content">
@@ -77,21 +52,7 @@
                     우편번호
                 </div>
                 <div class="hospital-update__input col">
-                    <input
-                            type="text"
-                            id="newZipCode"
-                            name="zipCode"
-                            required
-                    />
-                </div>
-                <div class="hospital-update__input find-btn col">
-                    <input
-                            type="button"
-                            id="zip-code-find__button"
-                            class="zip-code-find__button"
-                            onclick="execDaumPostcode()"
-                            value="찾기"
-                    />
+                    <input type="text" id="newZipCode" name="newZipCode" value="1414" disabled>
                 </div>
             </div>
             <div id="wrap">
@@ -114,12 +75,7 @@
                     병원 주소
                 </div>
                 <div class="hospital-update__input col">
-                    <input
-                            type="text"
-                            id="newAddress"
-                            name="address"
-                            required
-                    />
+                    <input type="text" id="newAddress" name="newAddress" value="독산 밑에 이미지 프론트는 백하는 사람이 수정 부탁" disabled>
                 </div>
             </div>
             <div class="hospital-update-content">
@@ -152,13 +108,13 @@
                     class="my-page-content save"
                     onclick="updateMemberInfo()"
             >
-                저장하기
+                <a th:href="@{/hospital/profile/form}">수정하기</a>
             </button>
         </div>
     </form>
 </main>
 <div layout:fragment="hospital_custom_js">
-    <script src="/js/hospital-update.js"></script>
+    <script src="/js/hospital-detail.js"></script>
 </div>
 </body>
 </html>
