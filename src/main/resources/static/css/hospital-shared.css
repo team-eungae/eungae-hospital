@@ -96,18 +96,3 @@ main {
     display: flex;
     justify-content: flex-end;
 }
-
-a:hover {
-    text-decoration: none;
-    color: inherit;
-}
-
-a:link {
-   text-decoration: none;
-   color: inherit;
-}
-
-a:visited {
-    text-decoration: none;
-    color: inherit;
-}
