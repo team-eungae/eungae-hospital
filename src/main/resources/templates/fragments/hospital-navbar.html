@@ -9,38 +9,29 @@
         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <div class="col-md-7 mb-2 mb-md-0">
         <a th:href="@{/main}" class="d-inline-flex link-body-emphasis text-decoration-none">
-            <img class="hospital-logo" src="/img/logo4.png" alt="EUNGAE LOGO">
+            <img class="hospital-logo" src="/img/logo4-2.png" alt="EUNGAE LOGO">
         </a>
     </div>
 
     <nav>
         <div class="dropdown">
-            <button class="dropbtn">병원정보</button>
+            <button class="dropbtn"><i class="fa-regular fa-hospital"></i> 병원정보</button>
             <div class="dropdown-content">
                 <a th:href="@{/hospital/form}">병원 상세</a>
                 <a th:href="@{/hospital/schedule}">병원 휴무일</a>
             </div>
         </div>
         <div class="dropdown">
-            <button class="dropbtn">의사정보</button>
+            <button class="dropbtn"><i class="fa-solid fa-stethoscope"></i> 의사정보</button>
             <div class="dropdown-content">
                 <a href="#">의사 상세</a>
                 <a th:href="@{/doctor/form}">의사 수정</a>
                 <a href="#">의사 등록</a>
             </div>
         </div>
-        <div class="dropdown">
-            <button class="dropbtn">고객센터</button>
-            <div class="dropdown-content">
-                <a href="#">공지사항</a>
-                <a href="#">Q&A</a>
-                <a href="#">1:1 문의</a>
-            </div>
-        </div>
     </nav>
-
     <div class="col-md-2 text-end logout-btn">
-        <button type="button" class="btn btn-outline-dark me-2">로그아웃</button>
+        <button type="button" th:href="@{/logout}" class="btn btn-outline-dark me-2">로그아웃</button>
     </div>
 </header>
 </body>
