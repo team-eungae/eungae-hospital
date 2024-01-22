@@ -18,7 +18,7 @@
                     병원 ID
                 </div>
                 <div class="hospital-update__input col">
-                    <input type="text" id="hospitalId" name="hospitalId" value="병원아이디" disabled>
+                    <input type="text" id="hospitalId" name="hospitalId" th:value="${hospital.hospitalId}" disabled>
                 </div>
             </div>
             <div class="hospital-update-content">
@@ -26,7 +26,7 @@
                     병원 이름
                 </div>
                 <div class="hospital-update__input col">
-                    <input type="text" id="name" name="name" value="새움병원" disabled>
+                    <input type="text" id="name" name="name" th:value="${hospital.name}" disabled>
                 </div>
             </div>
             <div class="hospital-update-content">
@@ -34,7 +34,7 @@
                     병원 연락처
                 </div>
                 <div class="hospital-update__input col">
-                    <input type="text" id="contact" name="contact" value="010-1234-1234" disabled>
+                    <input type="text" id="contact" name="contact" th:value="${hospital.contact}" disabled>
                 </div>
             </div>
             <div class="hospital-update-content">
@@ -42,40 +42,16 @@
                     한 줄 소개
                 </div>
                 <div class="hospital-update__input col">
-                    <input type="text" id="notice" name="notice" value="설에 쉽니다" disabled>
+                    <input type="text" id="notice" name="notice" th:value="${hospital.notice}" disabled>
                 </div>
             </div>
 
-
-            <div class="hospital-update-content">
-                <div class="hospital-update-sub__title col-3">
-                    우편번호
-                </div>
-                <div class="hospital-update__input col">
-                    <input type="text" id="newZipCode" name="newZipCode" value="1414" disabled>
-                </div>
-            </div>
-            <div id="wrap">
-                <img
-                        src="https://t1.daumcdn.net/postcode/resource/images/close.png"
-                        id="btnFoldWrap"
-                        style="
-                                    cursor: pointer;
-                                    position: absolute;
-                                    right: 0px;
-                                    top: -1px;
-                                    z-index: 1;
-                                "
-                        onclick="foldDaumPostcode()"
-                        alt="접기 버튼"
-                />
-            </div>
             <div class="hospital-update-content">
                 <div class="hospital-update-sub__title col-3">
                     병원 주소
                 </div>
                 <div class="hospital-update__input col">
-                    <input type="text" id="newAddress" name="newAddress" value="독산 밑에 이미지 프론트는 백하는 사람이 수정 부탁" disabled>
+                    <input type="text" id="newAddress" name="newAddress" th:value="${hospital.address}" disabled>
                 </div>
             </div>
             <div class="hospital-update-content">
@@ -83,14 +59,8 @@
                     병원 이미지
                 </div>
                 <div class="hospital-update__input col main-image">
-                    <div class="hospital-main-image">
-                        <img src="/img/hospital.jpg">
-                    </div>
-                    <div class="hospital-main-image">
-                        <img src="/img/doctor.jpeg">
-                    </div>
-                    <div class="hospital-main-image">
-                        <img src="/img/hospital.jpg">
+                    <div class="hospital-main-image" th:unless="${hospital.hospitalImageResponseDtoList eq null}" th:each="hospitalImage:${hospital.hospitalImageResponseDtoList}">
+                        <img th:src="@{/images/}+${hospitalImage.storeFileName}">
                     </div>
                 </div>
             </div>
@@ -100,15 +70,13 @@
                     type="button"
                     id="btn-update"
                     class="my-page-content save"
-                    onclick="updateMemberInfo()"
             >
-                <a th:href="@{/hospital/profile/form}">수정하기</a>
+                <a th:href="@{/hospital/profile/form}">정보 수정</a>
             </button>
         </div>
     </form>
 </main>
 <div layout:fragment="hospital_custom_js">
-    <script src="/js/hospital-detail.js"></script>
 </div>
 </body>
 </html>
