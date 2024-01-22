@@ -9,25 +9,32 @@
 
 <body>
 <main layout:fragment="hospital_content">
-    <form id="doctorForm">
-        <div id="profilePictureContainer" class="profile-picture-container">
-            <img id="thumbnail" src="/img/doctor.jpeg" alt="Thumbnail">
+    <form th:action="@{/doctor}"
+          th:object="${doctorRequestDto}"
+          method="post"
+          enctype="multipart/form-data"
+          id="doctorForm">
+        <div id="profilePictureContainer" class="profile-picture-container" onclick="selectImage()">
+            <input type="file" id="file-input" name="profileImage" accept="image/*" style="display: none;" onchange="previewImage(event);" required>
+            <img id="preview" src="/img/doctor.jpeg" alt="Thumbnail">
             <div class="change-text">사진 바꾸기</div>
         </div>
-        <input type="file" id="photo" name="photo" accept="image/*" style="display: none;" required>
 
         <label for="name">이름</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" th:name="name" required>
+        <p th:if="#{#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError"></p>
 
-        <label for="phone">핸드폰</label>
-        <input class="doctor-form__phone" type="tel" id="phone" name="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}"
-               placeholder="숫자만 입력하세요. 예: 01012345678"
+        <label for="treatmentPossible">30분당 진료 가능 환자</label>
+        <input type="number" th:field="*{treatmentPossible}" class="treatmentPossible"  id="treatmentPossible" name="treatmentPossible"
+               placeholder="숫자만 입력하세요."
                required>
+        <p th:if="#{#fields.hasErrors('treatmentPossible')}" th:errors="*{treatmentPossible}" class="fieldError"></p>
 
-        <button type="submit">등록</button>
+        <button class="submit-btn" type="submit">등록</button>
     </form>
 </main>
 <div layout:fragment="hospital_custom_js">
+    <script src="/js/doctor-add.js"></script>
 </div>
 </body>
 </html>
