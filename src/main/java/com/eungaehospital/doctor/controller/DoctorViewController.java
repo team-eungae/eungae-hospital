@@ -50,7 +50,7 @@ public class DoctorViewController {
 
 		doctorService.saveDoctor(doctorRequestDto, resultFileStore, hospitalId);
 
-		return "redirect:/hospital-main";
+		return "redirect:/main";
 	}
 
 }
