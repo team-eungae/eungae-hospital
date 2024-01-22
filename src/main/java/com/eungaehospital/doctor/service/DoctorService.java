@@ -56,14 +56,14 @@ public class DoctorService {
     }
 
     @Transactional
-    public boolean changeDoctorStatus(Long doctorSeq) {
+    public DoctorStatus changeDoctorStatus(Long doctorSeq) {
         Doctor doctor = doctorRepository.findById(doctorSeq)
                 .orElseThrow(() -> new IllegalStateException("can not found doctor. doctorSeq = {%d})".formatted(doctorSeq)));
         if (doctor.getStatus() == DoctorStatus.ON) {
             doctor.setStatus(DoctorStatus.OFF);
-            return false;
+            return DoctorStatus.OFF;
         }
         doctor.setStatus(DoctorStatus.ON);
-        return true;
+        return DoctorStatus.ON;
     }
 }

@@ -8,7 +8,7 @@ $('.doctor-on-off').click(function () {
         success: function (status) {
             let statusContainer = $('#doctor-status-' + doctorSeq);
             statusContainer.empty();
-            if (status) {
+            if (status === 'ON') {
                 // 진료가능 상태일 때 아이콘과 텍스트 변경
                 statusContainer.append('<span class="badge bg-green text-light">ON</span>');
             } else {
