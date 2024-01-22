@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+main {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+.doctor-list-title {
+    text-align: center;
+    padding: 0 1.5rem;
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 1.8rem;
+    vertical-align: middle;
+}
+
+.doctor-list-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #326eb3;
+  color: black;
+  border-radius: 30px;
+}
+
+.flip-card-front img {
+  border-radius: 30px;
+}
+
+.flip-card-back {
+  background-color: #142C47;
+  color: white;
+  transform: rotateY(180deg);
+  padding-top: 70px;
+  border-radius: 30px;
+}
+
+.doctor-name {
+    margin-bottom: 30px;
+}
+
+.middle-line {
+    text-align: center;
+    width: 10%;
+}
+
+.doctor-image {
+    width:300px;
+    height:300px;
+}

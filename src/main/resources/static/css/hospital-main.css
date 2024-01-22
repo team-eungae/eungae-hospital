@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 .table-container {
     margin-bottom: 1px;
     width: 100%;
 }
 
 body {
+    font-family: 'Noto Sans KR', sans-serif;
     padding: 1.5em;
 }
 
@@ -133,6 +135,7 @@ a {
 .doctor-commute-container {
     margin-top: 1rem;
     margin-bottom: 2rem;
+    display: flex;
 }
 
 .doctor-img-text {
@@ -144,6 +147,12 @@ a {
     border-radius: 8px;
     margin-right: 10px;
     background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.doctor-list {
+    display: inline-block;
 }
 
 .bg-green {
