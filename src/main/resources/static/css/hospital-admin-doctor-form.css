@@ -69,13 +69,16 @@ label {
     margin-bottom: 8px;
 }
 
-input,
-.doctor-form__phone {
+input {
     width: 100%;
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 10px;
+}
+
+.submit-btn {
+    padding: 10px;
 }
 
 button {

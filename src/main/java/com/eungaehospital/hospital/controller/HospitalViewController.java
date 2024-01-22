@@ -30,11 +30,6 @@ public class HospitalViewController {
 		return "contents/hospital-update";
 	}
 
-	@GetMapping("/doctor/form")
-	public String addDoctor() {
-		return "contents/hospital-admin-doctor-form";
-	}
-
 	@GetMapping("/hospital/schedule")
 	public String hospitalSchedule() {
 		return "contents/hospital-schedule";
