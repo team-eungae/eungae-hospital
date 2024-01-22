@@ -116,18 +116,3 @@ td > input {
     border-radius: 11px;
     display: inline-block;
 }
-
-a:hover {
-    text-decoration: none;
-    color: inherit;
-}
-
-a:link {
-   text-decoration: none;
-   color: inherit;
-}
-
-a:visited {
-    text-decoration: none;
-    color: inherit;
-}
