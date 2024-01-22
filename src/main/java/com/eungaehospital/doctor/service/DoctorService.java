@@ -25,4 +25,5 @@ public class DoctorService {
                 .map(DoctorResponseDto::toDto)
                 .collect(Collectors.toList());
     }
+
 }

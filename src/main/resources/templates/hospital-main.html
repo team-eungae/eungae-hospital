@@ -35,65 +35,66 @@
             <th class="tb-center">방문여부</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="appointment-list-body">
         <tr class="appointment-record">
-            <a href="#">
-                <td class="tb-center">1</td>
-                <td class="tb-center">김우진</td>
-                <td class="tb-center">23세</td>
-                <td class="tb-center">9:00</td>
-                <td class="tb-center">김년천</td>
-                <td class="tb-center">재진</td>
-                <td class="tb-center">감기</td>
-            </a>
-            <td class="tb-center">
-                <button class="visited-check">
-                    방문
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="tb-center">2</td>
-            <td class="tb-center">홍지혜</td>
-            <td class="tb-center">24세</td>
-            <td class="tb-center">9:00</td>
-            <td class="tb-center">김년천</td>
-            <td class="tb-center">초진</td>
-            <td class="tb-center">엉덩이 아파요</td>
-            <td class="tb-center">
-                <button class="visited-check">
-                    방문
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="tb-center">3</td>
-            <td class="tb-center">김수용</td>
-            <td class="tb-center">23세</td>
-            <td class="tb-center">9:11</td>
-            <td class="tb-center">김년천</td>
-            <td class="tb-center">초진</td>
-            <td height="40%" style="
-                                width: 40%;
-                                text-overflow: ellipsis;
-                                overflow: hidden;
-                                white-space: nowrap;
-                            " class="symptom">
-                거짓말이 막 나오고 기분이 오르락 내리락
-                해요 아침엔 화가 났다가 밤만 되면 눈물이
-                나와요
-            </td>
-            <td class="tb-center">
-                <button class="visited-check">
-                    방문
-                </button>
-            </td>
-        </tr>
+<!--            <a href="#">-->
+<!--                <td class="tb-center" th:text= "${appointment.appointmentSeq}"></td>-->
+<!--                <td class="tb-center" th:text="${appointment.childrenName}"></td>-->
+<!--                <td class="tb-center">23세</td>-->
+<!--                <td class="tb-center">9:00</td>-->
+<!--                <td class="tb-center">김년천</td>-->
+<!--                <td class="tb-center">재진</td>-->
+<!--                <td class="tb-center">감기</td>-->
+<!--            </a>-->
+<!--            <td class="tb-center">-->
+<!--                <button class="visited-check">-->
+<!--                    방문-->
+<!--                </button>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td class="tb-center">2</td>-->
+<!--            <td class="tb-center">홍지혜</td>-->
+<!--            <td class="tb-center">24세</td>-->
+<!--            <td class="tb-center">9:00</td>-->
+<!--            <td class="tb-center">김년천</td>-->
+<!--            <td class="tb-center">초진</td>-->
+<!--            <td class="tb-center">엉덩이 아파요</td>-->
+<!--            <td class="tb-center">-->
+<!--                <button class="visited-check">-->
+<!--                    방문-->
+<!--                </button>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td class="tb-center">3</td>-->
+<!--            <td class="tb-center">김수용</td>-->
+<!--            <td class="tb-center">23세</td>-->
+<!--            <td class="tb-center">9:11</td>-->
+<!--            <td class="tb-center">김년천</td>-->
+<!--            <td class="tb-center">초진</td>-->
+<!--            <td height="40%" style="-->
+<!--                                width: 40%;-->
+<!--                                text-overflow: ellipsis;-->
+<!--                                overflow: hidden;-->
+<!--                                white-space: nowrap;-->
+<!--                            " class="symptom">-->
+<!--                거짓말이 막 나오고 기분이 오르락 내리락-->
+<!--                해요 아침엔 화가 났다가 밤만 되면 눈물이-->
+<!--                나와요-->
+<!--            </td>-->
+<!--            <td class="tb-center">-->
+<!--                <button class="visited-check">-->
+<!--                    방문-->
+<!--                </button>-->
+<!--            </td>-->
+            </tr>
         </tbody>
     </table>
 </main>
 <div layout:fragment="hospital_custom_js">
     <script src="/js/hospital-main.js"></script>
+    <script src="/js/loadAppointments.js"></script>
 </div>
 </body>
 </html>
