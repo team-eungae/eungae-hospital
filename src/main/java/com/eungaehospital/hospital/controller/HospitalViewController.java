@@ -10,15 +10,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 @RequiredArgsConstructor
+@RequestMapping("/hospital")
 @Controller
 public class HospitalViewController {
 
 	private final DoctorService doctorService;
-
 	@GetMapping("/main")
 	public String getMainView(@AuthenticationPrincipal UserDetails userDetails,
 							  Model model) {
@@ -29,9 +29,13 @@ public class HospitalViewController {
 
 	}
 
+	@GetMapping("/profile")
+	public String hospitalPage() {
+		return "contents/hospital-detail";
+	}
 
 
-	@GetMapping("/hospital/form")
+	@GetMapping("/doctors/form")
 	public String updateHospital() {
 		return "contents/hospital-update";
 	}
