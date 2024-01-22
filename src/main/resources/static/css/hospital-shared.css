@@ -21,8 +21,7 @@ main {
 }
 
 .hospital-logo {
-    width: 50px;
-    height: 50px;
+    width: 35%;
 }
 
 .nav-link {
@@ -44,7 +43,6 @@ main {
 }
 
 .dropbtn {
-    font-family: "Noto Sans KR";
     color: #333;
     background-color: white;
     padding: 12px;
@@ -88,7 +86,7 @@ main {
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #326eb3;
+    background-color: #142C47;
     color: white;
 }
 

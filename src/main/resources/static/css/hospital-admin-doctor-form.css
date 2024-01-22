@@ -72,12 +72,16 @@ label {
 input,
 .doctor-form__phone {
     width: 100%;
+    border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 15px;
+    border-radius: 10px;
 }
 
 button {
-    background-color: #326eb3;
+    background-color: #142C47;
+    border-radius: 10px;
+    padding: 10px;
     color: white;
     border: none;
     cursor: pointer;
