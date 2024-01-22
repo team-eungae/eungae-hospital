@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/hosptial_main_layout}">
+<th:block layout:fragment="hospital_custom_header">
+    <link rel="stylesheet" href="/css/doctor-list.css">
+    <title>응애 - 병원 메인</title>
+</th:block>
+
+<body>
+<main layout:fragment="hospital_content">
+    <div class="doctor-list-title">
+        <h3>우리 병원 의료진 <i class="fa-solid fa-stethoscope"></i></h3>
+    </div>
+    <hr>
+    <div class="doctor-list-body">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="/img/kang.jpg" alt="Avatar" style="width:300px;height:300px;">
+                </div>
+                <div class="flip-card-back">
+                    <h3 class="doctor-name">홍지혜 의사</h3>
+                    <p>진료 인원 <span class="middle-line"> | </span> 3명</p>
+                    <button type="button" class="btn btn-info">수정하기</button>
+                    <button type="button" class="btn btn-light">삭제하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="/img/suyong.jpeg" alt="Avatar" class="doctor-image">
+                </div>
+                <div class="flip-card-back">
+                    <h3 class="doctor-name">이신의 의사</h3>
+                    <p>진료 인원 <span class="middle-line"> | </span> 2명</p>
+                    <button type="button" class="btn btn-info">수정하기</button>
+                    <button type="button" class="btn btn-light">삭제하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="/img/suyong.jpeg" alt="Avatar" style="width:300px;height:300px;">
+                </div>
+                <div class="flip-card-back">
+                    <h3 class="doctor-name">손용수 의사</h3>
+                    <p>진료 인원 <span class="middle-line"> | </span> 5명</p>
+                    <button type="button" class="btn btn-info">수정하기</button>
+                    <button type="button" class="btn btn-light">삭제하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div layout:fragment="hospital_custom_js">
+</div>
+</body>
+</html>
