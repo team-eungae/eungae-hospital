@@ -135,6 +135,7 @@ a {
 .doctor-commute-container {
     margin-top: 1rem;
     margin-bottom: 2rem;
+    display: flex;
 }
 
 .doctor-img-text {
@@ -146,6 +147,12 @@ a {
     border-radius: 8px;
     margin-right: 10px;
     background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.doctor-list {
+    display: inline-block;
 }
 
 .bg-green {
