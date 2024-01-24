@@ -11,10 +11,15 @@ function loadAppointments() {
 function updateAppointmentsTable(appointments) {
     var tableBody = document.getElementById('appointment-list-body');
     tableBody.innerHTML = '';
-    appointments.forEach(appointment => {
-        var formattedTime = appointment.appointmentHourMinute.substring(0, 2) + ":" + appointment.appointmentHourMinute.substring(2);
+    if (appointments.length === 0) {
+        // 예약이 없을 경우의 메시지를 표시합니다.
+        tableBody.innerHTML = '<tr><td colspan="8" class="tb-center">접수된 예약이 없습니다.</td></tr>';
+    } else {
 
-        var row = `<tr>
+        appointments.forEach(appointment => {
+            var formattedTime = appointment.appointmentHourMinute.substring(0, 2) + ":" + appointment.appointmentHourMinute.substring(2);
+
+            var row = `<tr>
                     <td class="tb-center">${appointment.appointmentSeq}</td>
                     <td class="tb-center">${appointment.childrenName}</td>
                     <td class="tb-center">${appointment.age}</td>
@@ -31,8 +36,9 @@ function updateAppointmentsTable(appointments) {
                     </td>
 
                    </tr>`;
-        tableBody.innerHTML += row;
-    });
+            tableBody.innerHTML += row;
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
