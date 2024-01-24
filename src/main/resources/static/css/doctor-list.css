@@ -59,15 +59,17 @@ main {
 }
 
 .flip-card-front img {
-  border-radius: 30px;
+    border-radius: 30px;
+    width: 300px;
+    height: 300px;
 }
 
 .flip-card-back {
-  background-color: #142C47;
-  color: white;
-  transform: rotateY(180deg);
-  padding-top: 70px;
-  border-radius: 30px;
+    background-color: #142C47;
+    color: white;
+    transform: rotateY(180deg);
+    padding-top: 70px;
+    border-radius: 30px;
 }
 
 .doctor-name {
@@ -82,4 +84,19 @@ main {
 .doctor-image {
     width:300px;
     height:300px;
+}
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:link {
+   text-decoration: none;
+   color: inherit;
+}
+
+a:visited {
+    text-decoration: none;
+    color: inherit;
 }

@@ -4,23 +4,19 @@ import com.eungaehospital.doctor.domain.Doctor;
 import com.eungaehospital.doctor.dto.DoctorRequestDto;
 import com.eungaehospital.doctor.domain.DoctorStatus;
 import com.eungaehospital.doctor.dto.DoctorResponseDto;
+import com.eungaehospital.doctor.dto.DoctorUpdateRequestDto;
 import com.eungaehospital.doctor.repository.DoctorRepository;
 import com.eungaehospital.file.ResultFileStore;
 import com.eungaehospital.hospital.domain.Hospital;
 import com.eungaehospital.hospital.repository.HospitalRepository;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -37,15 +33,15 @@ public class DoctorService {
         List<Doctor> doctorList = doctorRepository.findAllByHospitalHospitalId(hospitalId);
 
         return doctorList.stream()
-            .map(DoctorResponseDto::toDto)
-            .collect(Collectors.toList());
+                .map(DoctorResponseDto::toDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional
     public void saveDoctor(
-        DoctorRequestDto doctorRequestDto,
-        ResultFileStore resultFileStore,
-        String id) {
+            DoctorRequestDto doctorRequestDto,
+            ResultFileStore resultFileStore,
+            String id) {
 
         Doctor doctor = DoctorRequestDto.toEntity(doctorRequestDto, resultFileStore.getStoreFileName());
 
@@ -65,5 +61,26 @@ public class DoctorService {
         }
         doctor.setStatus(DoctorStatus.ON);
         return DoctorStatus.ON;
+    }
+
+    @Transactional(readOnly = true)
+    public DoctorResponseDto getDoctorById(Long doctorSeq) {
+        Doctor doctor = doctorRepository.findById(doctorSeq)
+                .orElseThrow(() -> new IllegalArgumentException("can not found doctor. doctorSeq = {%d}".formatted(doctorSeq)));
+        return DoctorResponseDto.toDto(doctor);
+    }
+
+    @Transactional
+    public void updateDoctor(DoctorUpdateRequestDto doctorUpdateRequestDto, ResultFileStore resultFileStore) {
+        Doctor doctor = doctorRepository.findById(doctorUpdateRequestDto.getDoctorSeq())
+                .orElseThrow(() -> new IllegalArgumentException("can not found doctor. doctorSeq = {%d}".formatted(doctorUpdateRequestDto.getDoctorSeq())));
+
+        if (resultFileStore.getStoreFileName() == null) {
+            doctor.updateDoctor(doctorUpdateRequestDto.getTreatmentPossible());
+        } else {
+            doctor.updateDoctor(doctorUpdateRequestDto.getTreatmentPossible(),
+                    resultFileStore.getStoreFileName());
+        }
+        doctorRepository.save(doctor);
     }
 }

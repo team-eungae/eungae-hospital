@@ -15,9 +15,8 @@ public class DoctorApiController {
     private final DoctorService doctorService;
 
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("/doctor/status")
+    @PatchMapping("/doctors/status")
     public DoctorStatus changeDoctorStatus(@RequestParam("doctorSeq") Long doctorSeq) {
         return doctorService.changeDoctorStatus(doctorSeq);
     }
-
 }

@@ -3,7 +3,7 @@ $('.doctor-on-off').click(function () {
 
     $.ajax({
         type: 'PATCH',
-        url: '/api/hospital/doctor/status?doctorSeq=' + doctorSeq,
+        url: '/api/hospital/doctors/status?doctorSeq=' + doctorSeq,
         contentType: 'application/json',
         success: function (status) {
             let statusContainer = $('#doctor-status-' + doctorSeq);
