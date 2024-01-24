@@ -47,11 +47,6 @@ public class HospitalViewController {
 		return "contents/hospital-update";
 	}
 
-	@GetMapping("/doctors/form")
-	public String addDoctor() {
-		return "contents/hospital-admin-doctor-form";
-	}
-
 	@GetMapping("/schedule")
 	public String hospitalSchedule() {
 		return "contents/hospital-schedule";
