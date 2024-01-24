@@ -21,6 +21,87 @@
     <h3>예약 목록</h3>
     <input class="calender mb-2" type="date" id="date"/>
     <button id="on-site-modal-btn">현장등록</button>
+    <div id="on-site-registration" class="hidden">
+        <div id="modalContent">
+            <h5>현장 등록 환자</h5>
+            <hr/>
+            <div class="modal-info">
+                <form action="">
+                    <div class="modal-page">
+                        <div class="modal-page-content">
+                            <div class="modal-page-sub__title col-3">
+                                이름
+                            </div>
+                            <div class="modal-page__input col">
+                                <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        required
+                                />
+                            </div>
+                        </div>
+                        <div class="modal-page-content">
+                            <div class="modal-page-sub__title col-3">
+                                생년월일
+                            </div>
+                            <div class="modal-page__input col">
+                                <input
+                                        type="text"
+                                        id="birth"
+                                        name="birth"
+                                        required
+                                />
+                            </div>
+                        </div>
+                        <div class="modal-page-content">
+                            <div class="modal-page-sub__title col-3">
+                                전화번호
+                            </div>
+                            <div class="modal-page__input col">
+                                <input
+                                        type="text"
+                                        id="tel"
+                                        name="tel"
+                                        required
+                                />
+                            </div>
+                        </div>
+                        <div class="modal-page-content">
+                            <div class="modal-page-sub__title col-3">
+                                증상
+                            </div>
+                            <div class="modal-page__input col">
+                                <input
+                                        type="text"
+                                        id="symptom"
+                                        name="symptom"
+                                        required
+                                />
+                            </div>
+                        </div>
+                        <div class="modal-page-content">
+                            <div class="modal-page-sub__title col-3">
+                                주소
+                            </div>
+                            <div class="modal-page__input col">
+                                <input
+                                        type="text"
+                                        id="addr"
+                                        name="addr"
+                                        required
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-send-btn">
+                <button id="modalCloseButton">닫기</button>
+                <button id="visited-send">등록</button>
+            </div>
+        </div>
+    </div>
 
     <table id="appointment-list" class="table-container">
         <thead>
@@ -37,7 +118,6 @@
         </thead>
         <tbody id="appointment-list-body">
         <tr class="appointment-record">
-           
         </tr>
         </tbody>
     </table>

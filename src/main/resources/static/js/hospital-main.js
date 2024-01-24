@@ -22,3 +22,15 @@ $('.doctor-on-off').click(function () {
     })
 })
 
+//현장등록 모달창
+const modalOpenButton = document.getElementById("on-site-modal-btn");
+const modalCloseButton = document.getElementById("modalCloseButton");
+const modal = document.getElementById("on-site-registration");
+
+modalOpenButton.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+});
+
+modalCloseButton.addEventListener("click", () => {
+    modal.classList.add("hidden");
+});
