@@ -7,7 +7,17 @@ function loadAppointments() {
         })
         .catch(error => console.error('Error:', error));
 }
+function formatBirthdate(dateStr) {
+    if (dateStr && dateStr.length === 8) {
+        var year = dateStr.substring(0, 4);
+        var month = dateStr.substring(4, 6);
+        var day = dateStr.substring(6, 8);
 
+        return `${year}년 ${month}월 ${day}일`;
+    } else {
+        return '유효하지 않은 데이터';
+    }
+}
 function updateAppointmentsTable(appointments) {
     var tableBody = document.getElementById('appointment-list-body');
     tableBody.innerHTML = '';
@@ -27,11 +37,11 @@ function updateAppointmentsTable(appointments) {
         let timeOrder = 1;
         appointments.forEach(appointment => {
             var formattedTime = appointment.appointmentHourMinute.substring(0, 2) + ":" + appointment.appointmentHourMinute.substring(2);
-
+            var formattedBirthdate = formatBirthdate(appointment.age);
             var row = `<tr>
                     <td class="tb-center">${timeOrder++}</td>
                     <td class="tb-center">${appointment.childrenName}</td>
-                    <td class="tb-center">${appointment.age}</td>
+                    <td class="tb-center">${formattedBirthdate}</td>
                     <td class="tb-center">${formattedTime}</td>
                     <td class="tb-center">${appointment.doctor}</td>
                     <td class="tb-center">${appointment.note}</td>
