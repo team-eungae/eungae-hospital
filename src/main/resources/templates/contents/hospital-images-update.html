@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/hosptial_main_layout}">
+<th:block layout:fragment="hospital_custom_header">
+    <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link rel="stylesheet" href="/css/hospital-update.css">
+    <title>응애 - 병원 이미지 수정</title>
+</th:block>
+>
+
+<body>
+<main layout:fragment="hospital_content">
+    <form class="hospital-image-update-form" th:method="POST" th:action="@{/hospital/images/form}" id="myForm"
+          enctype="multipart/form-data">
+        <p class="hospital-update-title">병원 이미지 수정</p>
+        <div class="hospital-update">
+            <div class="hospital-update-content">
+                <div class="hospital-update-sub__title col-3">
+                    병원 이미지 목록
+                </div>
+                <div class="hospital-update__input col">
+                    <div class="insert">
+                        <input type="file" id="hospitalImage" name="newHospitalImageList" onchange="addFile(this);"
+                               multiple/>
+
+                        <div class="file-list">
+                            <div th:unless="${hospitalImageResponseDtoList eq null}"
+                                 th:each="image, iterStat:${hospitalImageResponseDtoList}">
+                                <div th:id="'file' + ${iterStat.index}+'_'+${image.hospitalImageSeq}" class="filebox">
+                                    <img th:src="@{/images/} + ${image.storeFileName}" alt="file-preview"/>
+                                    <p class="name" th:text="${image.originFileName}"></p>
+
+                                    <a class="delete"
+                                       th:attr="onclick='deleteOriginFile('+${iterStat.index}+','+${image.hospitalImageSeq} + ');'">
+                                        <i class="far fa-minus-square"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hospital-update-content">
+            <button type="submit" id="btn-update" class="my-page-content save">이미지 저장</button>
+        </div>
+    </form>
+</main>
+<div layout:fragment="hospital_custom_js">
+    <script src="/js/hospital-images-update.js"></script>
+</div>
+</body>
+
+</html>
