@@ -41,6 +41,7 @@ function updateAppointmentsTable(appointments) {
             var row = `<tr>
                     <td class="tb-center">${timeOrder++}</td>
                     <td class="tb-center">${appointment.childrenName}</td>
+                    <td class="tb-center">${appointment.gender}</td>
                     <td class="tb-center">${formattedBirthdate}</td>
                     <td class="tb-center">${formattedTime}</td>
                     <td class="tb-center">${appointment.doctor}</td>

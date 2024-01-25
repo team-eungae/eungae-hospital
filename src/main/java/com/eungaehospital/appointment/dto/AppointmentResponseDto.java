@@ -12,6 +12,7 @@ public class AppointmentResponseDto {
 	private Long appointmentSeq;
 	private String childrenName;
 	private String age;
+	private String gender;
 	private String appointmentHourMinute;
 	private String doctor;
 	private String note;
@@ -22,6 +23,7 @@ public class AppointmentResponseDto {
 			.appointmentSeq(appointment.getAppointmentSeq())
 			.childrenName(appointment.getChildren().getName())
 			.age(appointment.getChildren().getBirthDate())
+			.gender(appointment.getChildren().getGender())
 			.appointmentHourMinute(appointment.getAppointmentHHMM())
 			.doctor(appointment.getDoctor().getName())
 			.note(appointment.getNote())
