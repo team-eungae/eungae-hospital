@@ -8,6 +8,7 @@ import org.hibernate.annotations.ColumnDefault;
 import com.eungaehospital.appointment.domain.Appointment;
 import com.eungaehospital.base.BaseEntity;
 import com.eungaehospital.doctor.domain.Doctor;
+import com.eungaehospital.hospital.dto.HospitalUpdateRequestDto;
 import com.eungaehospital.member.domain.FavoritesHospital;
 import com.eungaehospital.review.domain.Review;
 
@@ -136,5 +137,12 @@ public class Hospital extends BaseEntity {
 
 	public void addHospitalImage(HospitalImage hospitalImage) {
 		this.hospitalImageList.add(hospitalImage);
+	}
+
+	public void updateHospitalInfo(String name, String contact, String notice, String address) {
+		this.name = name;
+		this.contact = contact;
+		this.notice = notice;
+		this.address = address;
 	}
 }

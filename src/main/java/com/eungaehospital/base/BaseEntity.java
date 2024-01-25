@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -28,9 +29,9 @@ public abstract class BaseEntity {
 	private LocalDateTime modifiedAt;
 
 	@ColumnDefault("'N'")
-	private char deleteYN;
+	private String deleteYN="N";
 
 	public void deleted() {
-		this.deleteYN = 'Y';
+		this.deleteYN = "Y";
 	}
 }
