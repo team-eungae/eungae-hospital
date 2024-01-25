@@ -1,6 +1,12 @@
+let today = new Date();
+let selectDate;
 
 function loadAppointments() {
-    var selectDate = document.getElementById('date').value;
+    selectDate = document.getElementById('date').value;
+    if(selectDate==''){
+        selectDate=today.toISOString().substring(0,10);
+        document.getElementById('date').value=selectDate;
+    }
     fetch('/appointments?selectDate=' + selectDate)
         .then(response => response.json())
         .then(appointments => {
