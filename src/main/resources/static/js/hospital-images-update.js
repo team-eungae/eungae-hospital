@@ -52,7 +52,6 @@ function addFile(obj) {
         }
     }
 
-    // 선택된 파일 없음 메시지 표시 제어
     if (fileList.children.length > 0) {
         selectedFilesLabel.style.display = "none";
     } else {
@@ -101,7 +100,6 @@ function deleteOriginFile(index, hospitalImageSeq) {
             headers: {"cache-control": "no-cache", pragma: "no-cache"},
             success: function (result) {
                 alert("병원 이미지가 삭제되었습니다.");
-                // 이미지와 관련된 미리보기 요소를 삭제
                 document.getElementById('file' + index + '_' + hospitalImageSeq).remove();
             },
             error: function (xhr, desc, err) {
@@ -110,7 +108,6 @@ function deleteOriginFile(index, hospitalImageSeq) {
             },
         });
     } else {
-        // 사용자가 취소를 선택한 경우에 수행할 작업 추가 (옵션)
         alert("삭제가 취소되었습니다.");
     }
 
