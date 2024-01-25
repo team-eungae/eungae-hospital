@@ -1,3 +1,16 @@
+//현장등록 모달창
+const modalOpenButton = document.getElementById("on-site-modal-btn");
+const modalCloseButton = document.getElementById("modalCloseButton");
+const modal = document.getElementById("on-site-registration");
+
+modalOpenButton.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+});
+
+modalCloseButton.addEventListener("click", () => {
+    modal.classList.add("hidden");
+});
+
 const sysdate = new Date();
 document.getElementById('date').value = sysdate.toISOString().substring(0, 10);
 document.getElementById('date').min = sysdate.toISOString().substring(0, 10);
@@ -36,4 +49,3 @@ $('.doctor-on-off').click(function () {
         }
     })
 })
-
