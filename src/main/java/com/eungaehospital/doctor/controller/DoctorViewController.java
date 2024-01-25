@@ -3,6 +3,7 @@ package com.eungaehospital.doctor.controller;
 import java.io.IOException;
 import java.util.List;
 
+import com.eungaehospital.appointment.domain.Appointment;
 import com.eungaehospital.doctor.dto.DoctorResponseDto;
 import com.eungaehospital.doctor.dto.DoctorUpdateRequestDto;
 import lombok.extern.slf4j.Slf4j;
@@ -56,13 +57,13 @@ public class DoctorViewController {
 
         doctorService.saveDoctor(doctorRequestDto, resultFileStore, hospitalId);
 
-        return "redirect:/main";
+        return "redirect:/hospital/main";
     }
 
     @GetMapping("/doctors")
     public String getDoctorList(@AuthenticationPrincipal UserDetails userDetails,
                                 Model model) {
-        List<DoctorResponseDto> doctorList = doctorService.findDoctorsByHospitalSeq(userDetails.getUsername());
+        List<DoctorResponseDto> doctorList = doctorService.findDoctorsByHospitalId(userDetails.getUsername());
         model.addAttribute("doctorList", doctorList);
         return "contents/doctor-list";
     }
@@ -86,5 +87,15 @@ public class DoctorViewController {
         ResultFileStore resultFileStore = fileStore.storeProfileFile(profileImage);
         doctorService.updateDoctor(doctorUpdateRequestDto, resultFileStore);
         return "redirect:/hospital/doctors";
+    }
+
+    @GetMapping("/doctors/{doctorSeq}")
+    public String deleteDoctor(@PathVariable Long doctorSeq) {
+        try {
+            doctorService.deleteDoctor(doctorSeq);
+            return "redirect:/hospital/doctors";
+        }catch (Exception e){
+            return "redirect:/hospital/doctors";
+        }
     }
 }

@@ -1,5 +1,8 @@
 package com.eungaehospital.doctor.service;
 
+import com.eungaehospital.appointment.domain.Appointment;
+import com.eungaehospital.appointment.domain.AppointmentStatus;
+import com.eungaehospital.appointment.repository.AppointmentRepository;
 import com.eungaehospital.doctor.domain.Doctor;
 import com.eungaehospital.doctor.dto.DoctorRequestDto;
 import com.eungaehospital.doctor.domain.DoctorStatus;
@@ -26,9 +29,10 @@ public class DoctorService {
 
     private final DoctorRepository doctorRepository;
     private final HospitalRepository hospitalRepository;
+    private final AppointmentRepository appointmentRepository;
 
     @Transactional(readOnly = true)
-    public List<DoctorResponseDto> findDoctorsByHospitalSeq(String hospitalId) {
+    public List<DoctorResponseDto> findDoctorsByHospitalId(String hospitalId) {
 
         List<Doctor> doctorList = doctorRepository.findAllByHospitalHospitalId(hospitalId);
 
@@ -53,7 +57,7 @@ public class DoctorService {
 
     @Transactional
     public DoctorStatus changeDoctorStatus(Long doctorSeq) {
-        Doctor doctor = doctorRepository.findById(doctorSeq)
+        Doctor doctor = doctorRepository.findByDoctorSeq(doctorSeq)
                 .orElseThrow(() -> new IllegalStateException("can not found doctor. doctorSeq = {%d})".formatted(doctorSeq)));
         if (doctor.getStatus() == DoctorStatus.ON) {
             doctor.setStatus(DoctorStatus.OFF);
@@ -82,5 +86,19 @@ public class DoctorService {
                     resultFileStore.getStoreFileName());
         }
         doctorRepository.save(doctor);
+    }
+
+    @Transactional
+    public void deleteDoctor(Long doctorSeq) {
+        Doctor doctor = doctorRepository.findById(doctorSeq)
+                .orElseThrow(() -> new IllegalArgumentException("can not found doctor. doctorSeq = {%d}".formatted(doctorSeq)));
+        List<Appointment> appointmentList = appointmentRepository.findAllByDoctorDoctorSeq(doctorSeq);
+        boolean hasAppointmentWithStatusAppointment = appointmentList.stream()
+                .anyMatch(appointment -> AppointmentStatus.APPOINTMENT.equals(appointment.getStatus()));
+
+        if (hasAppointmentWithStatusAppointment) {
+            throw new RuntimeException("APPOINTMENT 상태인 예약 정보가 있는 의사는 삭제할 수 없습니다.");
+        }
+        doctor.deleted();
     }
 }

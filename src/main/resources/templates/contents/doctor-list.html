@@ -26,15 +26,24 @@
                 </div>
                 <div class="flip-card-back">
                     <h3 class="doctor-name" th:text="${doctor.name}">홍지혜 의사</h3>
-                    <p>진료 인원 <span class="middle-line"> | </span> <span th:text="${doctor.treatmentPossible}"></span>명 </p>
-                    <button type="button" class="btn btn-info"><a th:href="@{/hospital/doctors/{doctorSeq}/form(doctorSeq=${doctor.doctorSeq})}">수정하기</a></button>
-                    <button type="button" class="btn btn-light">삭제하기</button>
+                    <p>진료 인원 <span class="middle-line"> | </span> <span th:text="${doctor.treatmentPossible}"></span>명
+                    </p>
+                    <div class="doctor-btn">
+                        <button type="button" class="btn btn-info"><a
+                                th:href="@{/hospital/doctors/{doctorSeq}/form(doctorSeq=${doctor.doctorSeq})}">수정하기</a>
+                        </button>
+                        <form id="deleteForm"
+                              th:action="@{/hospital/doctors/{doctorSeq}(doctorSeq=${doctor.doctorSeq})}" method="get" >
+                            <button type="submit" class="btn btn-light" onclick="alertDelete()">삭제하기</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
 <div layout:fragment="hospital_custom_js">
+    <script src="/js/doctor-list.js"></script>
 </div>
 </body>
 </html>

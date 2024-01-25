@@ -11,10 +11,20 @@
 <main layout:fragment="hospital_content">
     <h3>의사 선생님 출근 목록</h3>
     <div class="doctor-commute-container">
-        <button class="doctor-on-off on" th:each="doctor:${doctorList}" onclick="toggleStatus(this)">
-            <img src="/img/doctor.jpeg">
+        <button class="doctor-on-off" th:each="doctor:${doctorList}" th:id="'doctor-on-off-' + ${doctor.doctorSeq}">
+            <input type="hidden" class="doctorSeq" th:value="${doctor.doctorSeq}">
+            <img th:if="${doctor.doctorProfileImage eq null}" th:src="@{/img/doctor.jpeg}"
+                 alt="Basic Doctor Image"/>
+            <img th:unless="${doctor.doctorProfileImage eq null}"
+                 th:src="@{/images/} + ${doctor.doctorProfileImage}"
+                 alt="Doctor Image"/>
             <span class="doctor-img-text" th:text="${doctor.name}"></span>
-            <span class="badge bg-dark text-light">OFF</span>
+            <div class="doctor-status" th:id="'doctor-status-' + ${doctor.doctorSeq}">
+                <span class="badge bg-dark text-light" th:text="${doctor.status}"
+                      th:if="${doctor.status == T(com.eungaehospital.doctor.domain.DoctorStatus).OFF}"></span>
+                <span class="badge bg-green text-light" th:text="${doctor.status}"
+                      th:unless="${doctor.status == T(com.eungaehospital.doctor.domain.DoctorStatus).OFF}"></span>
+            </div>
         </button>
     </div>
 
