@@ -1,12 +1,12 @@
-var fileNo = 0;
-var filesArr = new Array();
+let fileNo = 0;
+let filesArr = new Array();
 
 /* 첨부파일 추가 */
 function addFile(obj) {
-    var maxFileCnt = 3;
-    var attFileCnt = document.querySelectorAll(".filebox").length;
-    var remainFileCnt = maxFileCnt - attFileCnt;
-    var curFileCnt = obj.files.length;
+    let maxFileCnt = 3;
+    let attFileCnt = document.querySelectorAll(".filebox").length;
+    let remainFileCnt = maxFileCnt - attFileCnt;
+    let curFileCnt = obj.files.length;
 
     if (curFileCnt > remainFileCnt) {
         alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
@@ -15,15 +15,15 @@ function addFile(obj) {
     }
 
     // 파일 리스트를 담을 변수
-    var fileList = document.querySelector(".file-list");
+    let fileList = document.querySelector(".file-list");
     // 선택된 파일 없음 메시지를 담을 변수
-    var selectedFilesLabel = document.querySelector(".selected-files-label");
+    let selectedFilesLabel = document.querySelector(".selected-files-label");
 
-    for (var i = 0; i < Math.min(curFileCnt, remainFileCnt); i++) {
+    for (let i = 0; i < Math.min(curFileCnt, remainFileCnt); i++) {
         const file = obj.files[i];
 
         if (validation(file)) {
-            var reader = new FileReader();
+            let reader = new FileReader();
             reader.onload = function (e) {
                 // 이미지 파일인 경우에만 미리보기 추가
                 if (file.type.match("image.*")) {
@@ -88,8 +88,7 @@ function deleteFile(num) {
 }
 
 function deleteOriginFile(index, hospitalImageSeq) {
-    console.log(hospitalImageSeq);
-    var result = confirm("삭제하시겠습니까?");
+    let result = confirm("삭제하시겠습니까?");
     if (result) {
         $.ajax({
             method: "PATCH",
@@ -106,14 +105,13 @@ function deleteOriginFile(index, hospitalImageSeq) {
                 document.getElementById('file' + index + '_' + hospitalImageSeq).remove();
             },
             error: function (xhr, desc, err) {
-                console.log(err)
                 alert("에러가 발생 하였습니다.");
                 return;
             },
         });
     } else {
         // 사용자가 취소를 선택한 경우에 수행할 작업 추가 (옵션)
-        console.log("삭제가 취소되었습니다.");
+        alert("삭제가 취소되었습니다.");
     }
 
 }
