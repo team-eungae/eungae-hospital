@@ -35,7 +35,7 @@ function addFile(obj) {
                         '" alt="file-preview" />';
                     htmlData += '   <p class="name">' + file.name + "</p>";
                     htmlData +=
-                        '   <a class="delete" onclick="deleteFile(' +
+                        '   <a class="delete-btn" onclick="deleteFile(' +
                         fileNo +
                         ');"><i class="far fa-minus-square"></i></a>';
                     htmlData += "</div>";
