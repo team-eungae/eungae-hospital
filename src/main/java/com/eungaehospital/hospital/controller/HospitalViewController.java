@@ -25,7 +25,7 @@ public class HospitalViewController {
 	@GetMapping("/main")
 	public String getMainView(@AuthenticationPrincipal UserDetails userDetails,
 							  Model model) {
-		List<DoctorResponseDto> doctorList = doctorService.findDoctorsByHospitalSeq(userDetails.getUsername());
+		List<DoctorResponseDto> doctorList = doctorService.findDoctorsByHospitalId(userDetails.getUsername());
 		model.addAttribute("doctorList", doctorList);
 		return "hospital-main";
 	}

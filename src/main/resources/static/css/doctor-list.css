@@ -100,3 +100,12 @@ a:visited {
     text-decoration: none;
     color: inherit;
 }
+
+.doctor-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.doctor-btn button {
+    margin: 5px;
+}

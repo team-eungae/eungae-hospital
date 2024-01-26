@@ -1,17 +1,17 @@
 package com.eungaehospital.doctor.service;
 
+import com.eungaehospital.appointment.domain.Appointment;
+import com.eungaehospital.appointment.repository.AppointmentRepository;
 import com.eungaehospital.doctor.domain.Doctor;
-import com.eungaehospital.doctor.dto.DoctorRequestDto;
 import com.eungaehospital.doctor.domain.DoctorStatus;
+import com.eungaehospital.doctor.dto.DoctorRequestDto;
 import com.eungaehospital.doctor.dto.DoctorResponseDto;
 import com.eungaehospital.doctor.dto.DoctorUpdateRequestDto;
 import com.eungaehospital.doctor.repository.DoctorRepository;
 import com.eungaehospital.file.ResultFileStore;
 import com.eungaehospital.hospital.domain.Hospital;
 import com.eungaehospital.hospital.repository.HospitalRepository;
-
 import lombok.RequiredArgsConstructor;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,14 +26,19 @@ public class DoctorService {
 
     private final DoctorRepository doctorRepository;
     private final HospitalRepository hospitalRepository;
+    private final AppointmentRepository appointmentRepository;
 
     @Transactional(readOnly = true)
-    public List<DoctorResponseDto> findDoctorsByHospitalSeq(String hospitalId) {
+    public List<DoctorResponseDto> findDoctorsByHospitalId(String hospitalId) {
 
         List<Doctor> doctorList = doctorRepository.findAllByHospitalHospitalId(hospitalId);
 
         return doctorList.stream()
-                .map(DoctorResponseDto::toDto)
+                .map(doctor -> {
+                    int currentAppointment = appointmentRepository.findAllByDoctorDoctorSeq(doctor.getDoctorSeq()).size();
+                    DoctorResponseDto doctorResponseDto = DoctorResponseDto.toDto(doctor, currentAppointment);
+                    return doctorResponseDto;
+                })
                 .collect(Collectors.toList());
     }
 
@@ -53,7 +58,7 @@ public class DoctorService {
 
     @Transactional
     public DoctorStatus changeDoctorStatus(Long doctorSeq) {
-        Doctor doctor = doctorRepository.findById(doctorSeq)
+        Doctor doctor = doctorRepository.findByDoctorSeq(doctorSeq)
                 .orElseThrow(() -> new IllegalStateException("can not found doctor. doctorSeq = {%d})".formatted(doctorSeq)));
         if (doctor.getStatus() == DoctorStatus.ON) {
             doctor.setStatus(DoctorStatus.OFF);
@@ -82,5 +87,17 @@ public class DoctorService {
                     resultFileStore.getStoreFileName());
         }
         doctorRepository.save(doctor);
+    }
+
+    @Transactional
+    public void deleteDoctor(Long doctorSeq) {
+        Doctor doctor = doctorRepository.findById(doctorSeq)
+                .orElseThrow(() -> new IllegalArgumentException("can not found doctor. doctorSeq = {%d}".formatted(doctorSeq)));
+        List<Appointment> appointmentList = appointmentRepository.findAllByDoctorDoctorSeq(doctorSeq);
+
+        if (!appointmentList.isEmpty()) {
+            throw new IllegalStateException("APPOINTMENT 상태인 예약 정보가 있는 의사는 삭제할 수 없습니다.");
+        }
+        doctor.deleted();
     }
 }
