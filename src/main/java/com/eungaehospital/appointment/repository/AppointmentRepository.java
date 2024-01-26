@@ -18,10 +18,12 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 		+ " where a.hospital.hospitalSeq = :hospitalSeq"
 		+ " and a.appointmentDate = :appointmentDate"
 		+ " and a.status = 'APPOINTMENT'")
-
 	List<Appointment> getAppointmentByAppointmentDateAndHospitalId(
 		Long hospitalSeq,
 		@Param("appointmentDate") LocalDate appointmentDate);
 
+	@Query("select a from Appointment a"
+			+ " where a.doctor.doctorSeq = :doctorSeq"
+			+ " and a.status = 'APPOINTMENT'")
 	List<Appointment> findAllByDoctorDoctorSeq(Long doctorSeq);
 }

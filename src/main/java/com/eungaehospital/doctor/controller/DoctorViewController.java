@@ -3,7 +3,7 @@ package com.eungaehospital.doctor.controller;
 import java.io.IOException;
 import java.util.List;
 
-import com.eungaehospital.appointment.domain.Appointment;
+import com.eungaehospital.appointment.service.AppointmentService;
 import com.eungaehospital.doctor.dto.DoctorResponseDto;
 import com.eungaehospital.doctor.dto.DoctorUpdateRequestDto;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 public class DoctorViewController {
 
     private final DoctorService doctorService;
-
+    private final AppointmentService appointmentService;
     private final FileStore fileStore;
 
     @GetMapping("/doctor/form")
@@ -94,7 +94,7 @@ public class DoctorViewController {
         try {
             doctorService.deleteDoctor(doctorSeq);
             return "redirect:/hospital/doctors";
-        }catch (Exception e){
+        } catch (IllegalStateException e) {
             return "redirect:/hospital/doctors";
         }
     }

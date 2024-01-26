@@ -13,6 +13,7 @@ public class DoctorResponseDto {
     private DoctorStatus status;
     private int treatmentPossible;
     private String doctorProfileImage;
+    private int currentAppointment;
 
     public static DoctorResponseDto toDto(Doctor doctor) {
         return DoctorResponseDto.builder()
@@ -21,6 +22,17 @@ public class DoctorResponseDto {
                 .status(doctor.getStatus())
                 .treatmentPossible(doctor.getTreatmentPossible())
                 .doctorProfileImage(doctor.getDoctorProfileImage())
+                .build();
+    }
+
+    public static DoctorResponseDto toDto(Doctor doctor, int currentAppointment) {
+        return DoctorResponseDto.builder()
+                .doctorSeq(doctor.getDoctorSeq())
+                .name(doctor.getName())
+                .status(doctor.getStatus())
+                .treatmentPossible(doctor.getTreatmentPossible())
+                .doctorProfileImage(doctor.getDoctorProfileImage())
+                .currentAppointment(currentAppointment)
                 .build();
     }
 }
