@@ -13,9 +13,7 @@ import lombok.Data;
 @Builder
 public class HospitalViewResponseDto {
 
-	private Long hospitalSeq;
 	private String hospitalId;
-	private String password;
 	private String name;
 	private String notice;
 	private int deposit; //예약금
@@ -30,9 +28,7 @@ public class HospitalViewResponseDto {
 			.collect(Collectors.toList());
 
 		return HospitalViewResponseDto.builder()
-			.hospitalSeq(entity.getHospitalSeq())
 			.hospitalId(entity.getHospitalId())
-			.password(entity.getPassword())
 			.name(entity.getName())
 			.notice(entity.getNotice())
 			.deposit(entity.getDeposit())

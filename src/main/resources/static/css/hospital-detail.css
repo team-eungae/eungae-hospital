@@ -66,6 +66,7 @@ main {
     padding: 0.5rem;
     border-radius: 11px;
     display: inline-block;
+    margin-right: 2rem;
 }
 
 #wrap {

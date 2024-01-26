@@ -20,7 +20,7 @@ public class FileStore {
 		return uploadPath + File.separator + storeFilename;
 	}
 
-	public List<ResultFileStore> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
+	public List<ResultFileStore> storeFiles(List<MultipartFile> multipartFiles) {
 		List<ResultFileStore> storeFileResult = new ArrayList<>();
 
 		if (!multipartFiles.isEmpty()) {
