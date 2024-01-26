@@ -51,7 +51,7 @@ public class WebSecurityConfig {
 				.loginProcessingUrl("/login-proc")
 				.usernameParameter("hospitalId")
 				.passwordParameter("password")
-				.defaultSuccessUrl("/main")
+				.defaultSuccessUrl("/hospital/main")
 				.failureUrl("/login/error"))
 			.logout(logout -> logout
 				.logoutUrl("/logout")

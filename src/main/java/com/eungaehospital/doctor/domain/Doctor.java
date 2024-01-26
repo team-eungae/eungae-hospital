@@ -47,4 +47,12 @@ public class Doctor extends BaseEntity {
         hospital.addDoctor(this);
     }
 
+    public void updateDoctor(int treatmentPossible, String doctorProfileImage) {
+        this.treatmentPossible = treatmentPossible;
+        this.doctorProfileImage = doctorProfileImage;
+    }
+
+    public void updateDoctor(int treatmentPossible) {
+        this.treatmentPossible = treatmentPossible;
+    }
 }

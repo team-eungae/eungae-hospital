@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/hosptial_main_layout}">
+<th:block layout:fragment="hospital_custom_header">
+    <link rel="stylesheet" href="/css/hospital-admin-doctor-form.css">
+    <title>응애(병원) - 의사 등록</title>
+</th:block>
+
+<body>
+<main layout:fragment="hospital_content">
+    <form method="post" enctype="multipart/form-data" th:action="@{/hospital/doctors}" id="doctor-update">
+
+        <input type="hidden" id="doctorSeq" name="doctorSeq" th:value="${doctor.doctorSeq}">
+
+        <div id="profilePictureContainer" class="profile-picture-container" onclick="selectImage()">
+            <input type="file" id="file-input" name="profileImage" accept="image/*" style="display: none;"
+                   onchange="previewImage(event)">
+            <img th:if="${doctor.doctorProfileImage eq null}" th:src="@{/img/doctor.jpeg}"
+                 alt="Basic Doctor Image"/>
+            <img th:unless="${doctor.doctorProfileImage eq null}"
+                 th:src="@{/images/} + ${doctor.doctorProfileImage}"
+                 alt="Doctor Image"/>
+            <div class="change-text">사진 바꾸기</div>
+        </div>
+        <label for="name">이름</label>
+        <input type="text" id="name" th:value="${doctor.name}" disabled>
+
+        <label for="treatmentPossible">30분당 진료 가능 환자</label>
+        <input type="number" class="treatmentPossible" id="treatmentPossible" name="treatmentPossible"
+               placeholder="숫자만 입력하세요." th:value="${doctor.treatmentPossible}"
+               required>
+
+        <button class="submit-btn" type="submit">수정</button>
+    </form>
+</main>
+<div layout:fragment="hospital_custom_js">
+    <script src="/js/doctor-update.js"></script>
+</div>
+</body>
+</html>

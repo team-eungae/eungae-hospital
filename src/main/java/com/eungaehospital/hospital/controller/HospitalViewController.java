@@ -1,5 +1,6 @@
 package com.eungaehospital.hospital.controller;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +21,6 @@ import com.eungaehospital.hospital.dto.HospitalImageResponseDto;
 import com.eungaehospital.hospital.dto.HospitalUpdateRequestDto;
 import com.eungaehospital.hospital.dto.HospitalViewResponseDto;
 import com.eungaehospital.hospital.service.HospitalService;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -34,8 +33,8 @@ public class HospitalViewController {
 
 	@GetMapping("/main")
 	public String getMainView(@AuthenticationPrincipal UserDetails userDetails,
-		Model model) {
-		List<DoctorResponseDto> doctorList = doctorService.findDoctorsByHospitalSeq(userDetails.getUsername());
+							  Model model) {
+		List<DoctorResponseDto> doctorList = doctorService.findDoctorsByHospitalId(userDetails.getUsername());
 		model.addAttribute("doctorList", doctorList);
 		return "hospital-main";
 	}
@@ -88,7 +87,7 @@ public class HospitalViewController {
 	public String addDoctor() {
 		return "contents/hospital-admin-doctor-form";
 	}
-
+  
 	@GetMapping("/schedule")
 	public String hospitalSchedule() {
 		return "contents/hospital-schedule";
@@ -98,5 +97,4 @@ public class HospitalViewController {
 	public String updateHospitalSchedule() {
 		return "contents/hospital-schedule-update";
 	}
-
 }

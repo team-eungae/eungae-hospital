@@ -1,14 +1,42 @@
+//현장등록 모달창
+const modalOpenButton = document.getElementById("on-site-modal-btn");
+const modalCloseButton = document.getElementById("modalCloseButton");
+const modal = document.getElementById("on-site-registration");
+
+modalOpenButton.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+});
+
+modalCloseButton.addEventListener("click", () => {
+    modal.classList.add("hidden");
+});
+
+const sysdate = new Date();
+document.getElementById('date').value = sysdate.toISOString().substring(0, 10);
+document.getElementById('date').min = sysdate.toISOString().substring(0, 10);
+
+//선택가능한 최대날짜 설정 다음달 말일까지
+var year = sysdate.getFullYear() + 1;
+var month = sysdate.getMonth() % 11 + 1;
+
+if (month < 10) {
+    month = "0" + month;
+}
+
+const nextmonthdate = new Date(year, month, 1);
+document.getElementById('date').max = nextmonthdate.toISOString().substring(0, 10);
+
 $('.doctor-on-off').click(function () {
     let doctorSeq = $(this).find('.doctorSeq').val();
 
     $.ajax({
         type: 'PATCH',
-        url: '/api/hospital/doctor/status?doctorSeq=' + doctorSeq,
+        url: '/api/hospital/doctors/status?doctorSeq=' + doctorSeq,
         contentType: 'application/json',
         success: function (status) {
             let statusContainer = $('#doctor-status-' + doctorSeq);
             statusContainer.empty();
-            if (status) {
+            if (status === 'ON') {
                 // 진료가능 상태일 때 아이콘과 텍스트 변경
                 statusContainer.append('<span class="badge bg-green text-light">ON</span>');
             } else {
@@ -21,4 +49,3 @@ $('.doctor-on-off').click(function () {
         }
     })
 })
-

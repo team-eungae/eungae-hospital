@@ -1,5 +1,6 @@
 package com.eungaehospital.doctor.controller;
 
+import com.eungaehospital.doctor.domain.DoctorStatus;
 import com.eungaehospital.doctor.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +15,8 @@ public class DoctorApiController {
     private final DoctorService doctorService;
 
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("/doctor/status")
-    public boolean changeDoctorStatus(@RequestParam("doctorSeq") Long doctorSeq) {
+    @PatchMapping("/doctors/status")
+    public DoctorStatus changeDoctorStatus(@RequestParam("doctorSeq") Long doctorSeq) {
         return doctorService.changeDoctorStatus(doctorSeq);
     }
-
 }
