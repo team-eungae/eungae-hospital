@@ -28,6 +28,7 @@ public class DoctorRequestDto {
 		return Doctor.builder()
 			.name(dto.getName())
 			.treatmentPossible(dto.getTreatmentPossible())
+			.doctorProfileImage(profileImage)
 			.build();
 	}
 
