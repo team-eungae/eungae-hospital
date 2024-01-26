@@ -53,6 +53,10 @@ a {
     color: #73685d;
 }
 
+button{
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
 .calender {
     padding: 6px;
     border-radius: 3px;
@@ -167,8 +171,8 @@ a {
 
 .visited-check:hover {
     color: #fff;
-    background-color: #326eb3;
-    border-color: #326eb3;
+    background-color: #142C47;
+    border-color: #142C47;
 }
 
 /* 예약 테이블 헤더 */
@@ -178,9 +182,9 @@ a {
 }
 
 #on-site-modal-btn:hover {
-    color: #fff;
-    background-color: #326eb3;
-    border-color: #326eb3;
+    color: #142C47;
+    background-color: #fff;
+    border-color: #142C47;
 }
 
 /* 현장등록 모달창  */

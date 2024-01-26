@@ -47,8 +47,6 @@ function addFile(obj) {
                 fileNo++;
             };
             reader.readAsDataURL(file);
-        } else {
-            continue;
         }
     }
 

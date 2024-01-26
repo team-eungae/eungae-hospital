@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eungaehospital.appointment.domain.Appointment;
+import com.eungaehospital.appointment.domain.AppointmentStatus;
 import com.eungaehospital.appointment.dto.AppointmentResponseDto;
+import com.eungaehospital.appointment.dto.AppointmentVisitedRequestDto;
 import com.eungaehospital.appointment.repository.AppointmentRepository;
 import com.eungaehospital.hospital.repository.HospitalRepository;
 
@@ -24,7 +26,7 @@ public class AppointmentService {
 	private final HospitalRepository hospitalRepository;
 
 	@Transactional(readOnly = true)
-	public List<AppointmentResponseDto> getAppointmentListBy(String hospitalId, String selectDate) {
+	public List<AppointmentResponseDto> getAppointmentList(String hospitalId, String selectDate) {
 		Long hospitalSeq = hospitalRepository.findByHospitalId(hospitalId).get().getHospitalSeq();
 		List<Appointment> appointment = appointmentRepository
 			.getAppointmentByAppointmentDateAndHospitalId(
@@ -34,6 +36,16 @@ public class AppointmentService {
 		return appointment.stream()
 			.map(AppointmentResponseDto::toDto)
 			.toList();
+	}
+
+	@Transactional
+	public void changeAppointmentStatusToDiagnosis(Long appointmentSeq) {
+
+		Appointment appointment = appointmentRepository.findById(appointmentSeq)
+			.orElseThrow(() -> new IllegalStateException(
+				"Cannot find Appointment. appointmentSeq = {%d}".formatted(appointmentSeq)));
+
+		appointment.setStatus(AppointmentStatus.DIAGNOSIS);
 	}
 
 	private LocalDate convertStringToLocalDate(String date) {
