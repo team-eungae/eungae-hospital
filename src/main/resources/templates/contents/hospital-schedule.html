@@ -38,23 +38,23 @@
             <tbody>
             <tr>
                 <td class="open-title">OPEN</td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="0900" disabled /></td>
-                <td><input type="text" value="" disabled /></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.monOpen}" disabled /></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.tueOpen}" disabled /></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.wedOpen}" disabled /></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.thuOpen}" disabled /></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.friOpen}" disabled /></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.satOpen}" disabled /></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.sunOpen}" disabled /></td>
             </tr>
             <tr>
                 <td class="close-title">CLOSE</td>
-                <td><input type="text" value="1830" disabled/></td>
-                <td><input type="text" value="1830" disabled/></td>
-                <td><input type="text" value="2000" disabled/></td>
-                <td><input type="text" value="1830" disabled/></td>
-                <td><input type="text" value="1830" disabled/></td>
-                <td><input type="text" value="1400" disabled/></td>
-                <td><input type="text" value="" disabled/></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.monClose}" disabled/></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.tueClose}" disabled/></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.wedClose}" disabled/></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.thuClose}" disabled/></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.friClose}" disabled/></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.satClose}" disabled/></td>
+                <td><input type="text" th:value="${hospitalScheduleDto.sunClose}" disabled/></td>
             </tr>
             </tbody>
         </table>
@@ -67,12 +67,12 @@
         <div class="hospital-lunch">
             <p class="lunch-start">
                 시작
-                <input type="text" value="1300" disabled/>
+                <input type="text" th:value="${hospitalScheduleDto.lunchHour}" disabled/>
             </p>
 
             <p class="lunch-end">
                 종료
-                <input type="text" value="1400" disabled/>
+                <input type="text" th:value="${hospitalScheduleDto.lunchEndHour}" disabled/>
             </p>
         </div>
     </div>
