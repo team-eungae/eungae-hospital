@@ -6,6 +6,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.eungaehospital.hospital.dto.HospitalScheduleViewDto;
 import com.eungaehospital.hospital.dto.HospitalViewResponseDto;
 import com.eungaehospital.hospital.service.HospitalService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -69,8 +71,14 @@ public class HospitalViewController {
 	@PostMapping("/schedule/form")
 	public String updateHospitalSchedule(
 		@AuthenticationPrincipal UserDetails userDetails,
-		HospitalScheduleViewDto hospitalScheduleViewDto
+		@Valid HospitalScheduleViewDto hospitalScheduleViewDto,
+		BindingResult bindingResult,
+		Model model
 	) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("hospitalScheduleViewDto", hospitalScheduleViewDto);
+			return "contents/hospital-schedule-update";
+		}
 		hospitalService.updateHospitalSchedule(userDetails.getUsername(), hospitalScheduleViewDto);
 		return "redirect:/hospital/schedule";
 	}

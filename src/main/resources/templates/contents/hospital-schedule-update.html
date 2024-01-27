@@ -9,7 +9,7 @@
 
 <body>
 <main layout:fragment="hospital_content">
-    <form action="/hospital/schedule/form" method="post">
+    <form th:object="${hospitalScheduleViewDto}" action="/hospital/schedule/form" method="post">
         <div class="hospital-schedule-title">
             <h3>영업 시간 관리</h3>
         </div>
@@ -60,6 +60,20 @@
                 </tbody>
             </table>
         </div>
+        <p th:if="${#fields.hasErrors('monOpen')}" th:errors="*{monOpen}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('monClose')}" th:errors="*{monClose}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('tueOpen')}" th:errors="*{tueOpen}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('tueClose')}" th:errors="*{tueClose}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('wedOpen')}" th:errors="*{wedOpen}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('wedClose')}" th:errors="*{wedClose}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('thuOpen')}" th:errors="*{thuOpen}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('thuClose')}" th:errors="*{thuClose}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('friOpen')}" th:errors="*{friOpen}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('friClose')}" th:errors="*{friClose}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('satOpen')}" th:errors="*{satOpen}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('satClose')}" th:errors="*{satClose}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('sunOpen')}" th:errors="*{sunOpen}" class="fieldError">잘못된 데이터입니다.</p>
+        <p th:if="${#fields.hasErrors('sunClose')}" th:errors="*{sunClose}" class="fieldError">잘못된 데이터입니다.</p>
         <hr />
         <div>
             <div class="hospital-lunch-title">
