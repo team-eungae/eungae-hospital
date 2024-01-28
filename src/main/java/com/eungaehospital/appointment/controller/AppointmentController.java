@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class AppointmentController {
 	private final AppointmentService appointmentService;
 
-	@GetMapping("/appointments/{appointment-seq}/status")
+	@GetMapping("/appointments/{appointmentSeq}/status")
 	public String checkVisitedAppointment(@PathVariable Long appointmentSeq) {
 		appointmentService.changeAppointmentStatusToDiagnosis(appointmentSeq);
 

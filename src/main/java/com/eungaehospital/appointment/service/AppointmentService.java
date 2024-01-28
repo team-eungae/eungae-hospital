@@ -28,10 +28,15 @@ public class AppointmentService {
 	@Transactional(readOnly = true)
 	public List<AppointmentResponseDto> getAppointmentList(String hospitalId, String selectDate) {
 		Long hospitalSeq = hospitalRepository.findByHospitalId(hospitalId).get().getHospitalSeq();
+
+		LocalDate appointmentDate = convertStringToLocalDate(selectDate);
 		List<Appointment> appointment = appointmentRepository
 			.getAppointmentByAppointmentDateAndHospitalId(
 				hospitalSeq,
-				convertStringToLocalDate(selectDate));
+				appointmentDate);
+
+		appointment.addAll(
+				appointmentRepository.getDiagnosisAppointmentByAppointmentDateAndHospitalId(hospitalSeq, appointmentDate));
 
 		return appointment.stream()
 			.map(AppointmentResponseDto::toDto)

@@ -5,6 +5,7 @@ function loadAppointments() {
         .then(appointments => {
             updateAppointmentsTable(appointments);
         })
+        .then()
         .catch(error => console.error('Error:', error));
 }
 function formatBirthdate(dateStr) {
@@ -22,15 +23,6 @@ function updateAppointmentsTable(appointments) {
     var tableBody = document.getElementById('appointment-list-body');
     tableBody.innerHTML = '';
 
-    // //시간 순으로 정렬.
-    // appointments.sort((a,b) => {
-    //     const timeComparison = a.appointmentHourMinute.localeCompare(b.appointmentHourMinute);
-    //     if (timeComparison !==0) {
-    //         return timeComparison;
-    //     }
-    //     return a.appointmentSeq - b.appointmentSeq;
-    // })
-
     if (appointments.length === 0) {
         // 예약이 없을 경우의 메시지를 표시합니다.
         tableBody.innerHTML = '<tr><td colspan="8" class="tb-center">접수된 예약이 없습니다.</td></tr>';
@@ -46,13 +38,23 @@ function updateAppointmentsTable(appointments) {
                     <td class="tb-center">${formattedBirthdate}</td>
                     <td class="tb-center">${formattedTime}</td>
                     <td class="tb-center">${appointment.doctor}</td>
-                    <td class="tb-center">${appointment.note}</td>
-                    <td class="tb-center">
-                        <button class="visited-check">
-                            방문
-                        </button>
-                    </td>
-                   </tr>`;
+                    <td class="tb-center">${appointment.note}</td>`;
+
+            if(appointment.status==='APPOINTMENT'){
+                row +=  `<td class="tb-center">
+                            <form method="get" action="/hospital/appointments/${appointment.appointmentSeq}/status">
+                                <button type="submit" class="visited-check" id="visited-btn">
+                                    방문
+                                </button>
+                            </form>
+                        </td>
+                       </tr>`;
+            }else{
+                row += `<td class="tb-center">
+                        </td>
+                       </tr>`;
+            }
+
             tableBody.innerHTML += row;
         });
     }
