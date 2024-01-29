@@ -1,19 +1,18 @@
 function loadAppointments() {
-    var selectDate = document.getElementById('date').value;
+    let selectDate = document.getElementById('date').value;
     fetch('/appointments?selectDate=' + selectDate)
         .then(response => response.json())
         .then(appointments => {
             updateAppointmentsTable(appointments);
         })
-        .then()
         .catch(error => console.error('Error:', error));
 }
 
 function formatBirthdate(dateStr) {
     if (dateStr && dateStr.length === 8) {
-        var year = dateStr.substring(0, 4);
-        var month = dateStr.substring(4, 6);
-        var day = dateStr.substring(6, 8);
+        let year = dateStr.substring(0, 4);
+        let month = dateStr.substring(4, 6);
+        let day = dateStr.substring(6, 8);
 
         return `${year}년 ${month}월 ${day}일`;
     } else {
@@ -22,7 +21,7 @@ function formatBirthdate(dateStr) {
 }
 
 function updateAppointmentsTable(appointments) {
-    var tableBody = document.getElementById('appointment-list-body');
+    let tableBody = document.getElementById('appointment-list-body');
     tableBody.innerHTML = '';
 
     if (appointments.length === 0) {
@@ -31,8 +30,8 @@ function updateAppointmentsTable(appointments) {
     } else {
         let timeOrder = 1;
         appointments.forEach(appointment => {
-            var formattedTime = appointment.appointmentHourMinute.substring(0, 2) + ":" + appointment.appointmentHourMinute.substring(2);
-            var formattedBirthdate = formatBirthdate(appointment.age);
+            let formattedTime = appointment.appointmentHourMinute.substring(0, 2) + ":" + appointment.appointmentHourMinute.substring(2);
+            let formattedBirthdate = formatBirthdate(appointment.age);
 
             if (appointment.status === 'APPOINTMENT') {
                 let row = `<tr>
