@@ -8,6 +8,7 @@ function loadAppointments() {
         .then()
         .catch(error => console.error('Error:', error));
 }
+
 function formatBirthdate(dateStr) {
     if (dateStr && dateStr.length === 8) {
         var year = dateStr.substring(0, 4);
@@ -19,6 +20,7 @@ function formatBirthdate(dateStr) {
         return '유효하지 않은 데이터';
     }
 }
+
 function updateAppointmentsTable(appointments) {
     var tableBody = document.getElementById('appointment-list-body');
     tableBody.innerHTML = '';
@@ -31,31 +33,46 @@ function updateAppointmentsTable(appointments) {
         appointments.forEach(appointment => {
             var formattedTime = appointment.appointmentHourMinute.substring(0, 2) + ":" + appointment.appointmentHourMinute.substring(2);
             var formattedBirthdate = formatBirthdate(appointment.age);
-            var row = `<tr>
-                    <td class="tb-center">${timeOrder++}</td>
-                    <td class="tb-center">${appointment.childrenName}</td>
-                    <td class="tb-center">${appointment.gender}</td>
-                    <td class="tb-center">${formattedBirthdate}</td>
-                    <td class="tb-center">${formattedTime}</td>
-                    <td class="tb-center">${appointment.doctor}</td>
-                    <td class="tb-center">${appointment.note}</td>`;
 
-            if(appointment.status==='APPOINTMENT'){
-                row +=  `<td class="tb-center">
-                            <form method="get" action="/hospital/appointments/${appointment.appointmentSeq}/status">
-                                <button type="submit" class="visited-check" id="visited-btn">
-                                    방문
-                                </button>
-                            </form>
-                        </td>
-                       </tr>`;
-            }else{
-                row += `<td class="tb-center">
-                        </td>
-                       </tr>`;
+            if (appointment.status === 'APPOINTMENT') {
+                let row = `<tr>
+                            <td class="tb-center">${timeOrder++}</td>
+                            <td class="tb-center">${appointment.childrenName}</td>
+                            <td class="tb-center">${appointment.gender}</td>
+                            <td class="tb-center">${formattedBirthdate}</td>
+                            <td class="tb-center">${formattedTime}</td>
+                            <td class="tb-center">${appointment.doctor}</td>
+                            <td class="tb-center">${appointment.note}</td>
+                            <td class="tb-center">
+                                    <form method="get" action="/hospital/appointments/${appointment.appointmentSeq}/status/visit">
+                                        <button type="submit" class="visited-check" id="visited-btn">
+                                            방문
+                                        </button>
+                                    </form>
+                                </td>
+                               </tr>`;
+
+                tableBody.innerHTML += row;
+            } else {
+                let row = `<tr>
+                            <td class="tb-center visited">${timeOrder++}</td>
+                            <td class="tb-center visited">${appointment.childrenName}</td>
+                            <td class="tb-center visited">${appointment.gender}</td>
+                            <td class="tb-center visited">${formattedBirthdate}</td>
+                            <td class="tb-center visited">${formattedTime}</td>
+                            <td class="tb-center visited">${appointment.doctor}</td>
+                            <td class="tb-center visited">${appointment.note}</td>
+                            <td class="tb-center visited">
+                                <form method="get" action="/hospital/appointments/${appointment.appointmentSeq}/status/restore">
+                                    <button type="submit" class="visited-check" id="visited-rollback-btn">
+                                        취소
+                                    </button>
+                                </form>
+                            </td>
+                           </tr>`;
+
+                tableBody.innerHTML += row;
             }
-
-            tableBody.innerHTML += row;
         });
     }
 }

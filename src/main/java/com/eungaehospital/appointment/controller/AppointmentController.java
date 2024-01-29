@@ -9,17 +9,17 @@ import com.eungaehospital.appointment.service.AppointmentService;
 
 import lombok.RequiredArgsConstructor;
 
-
 @RequiredArgsConstructor
 @RequestMapping("/hospital")
 @Controller
 public class AppointmentController {
 	private final AppointmentService appointmentService;
 
-	@GetMapping("/appointments/{appointmentSeq}/status")
-	public String checkVisitedAppointment(@PathVariable Long appointmentSeq) {
-		appointmentService.changeAppointmentStatusToDiagnosis(appointmentSeq);
+	@GetMapping("/appointments/{appointmentSeq}/status/{status}")
+	public String VisitedAppointment(@PathVariable Long appointmentSeq, @PathVariable String status) {
+		appointmentService.changeAppointmentStatusToDiagnosis(appointmentSeq, status);
 
 		return "redirect:/hospital/main";
 	}
+
 }

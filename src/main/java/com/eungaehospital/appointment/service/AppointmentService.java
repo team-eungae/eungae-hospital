@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eungaehospital.appointment.domain.Appointment;
 import com.eungaehospital.appointment.domain.AppointmentStatus;
 import com.eungaehospital.appointment.dto.AppointmentResponseDto;
-import com.eungaehospital.appointment.dto.AppointmentVisitedRequestDto;
 import com.eungaehospital.appointment.repository.AppointmentRepository;
 import com.eungaehospital.hospital.repository.HospitalRepository;
 
@@ -36,7 +35,7 @@ public class AppointmentService {
 				appointmentDate);
 
 		appointment.addAll(
-				appointmentRepository.getDiagnosisAppointmentByAppointmentDateAndHospitalId(hospitalSeq, appointmentDate));
+			appointmentRepository.getDiagnosisAppointmentByAppointmentDateAndHospitalId(hospitalSeq, appointmentDate));
 
 		return appointment.stream()
 			.map(AppointmentResponseDto::toDto)
@@ -44,13 +43,17 @@ public class AppointmentService {
 	}
 
 	@Transactional
-	public void changeAppointmentStatusToDiagnosis(Long appointmentSeq) {
+	public void changeAppointmentStatusToDiagnosis(Long appointmentSeq, String status) {
 
 		Appointment appointment = appointmentRepository.findById(appointmentSeq)
 			.orElseThrow(() -> new IllegalStateException(
 				"Cannot find Appointment. appointmentSeq = {%d}".formatted(appointmentSeq)));
 
-		appointment.setStatus(AppointmentStatus.DIAGNOSIS);
+		if (status.equals("visit")) {
+			appointment.setStatus(AppointmentStatus.DIAGNOSIS);
+		} else if (status.equals("restore")) {
+			appointment.setStatus(AppointmentStatus.APPOINTMENT);
+		}
 	}
 
 	private LocalDate convertStringToLocalDate(String date) {
