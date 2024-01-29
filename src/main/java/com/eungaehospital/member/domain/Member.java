@@ -62,8 +62,8 @@ public class Member extends BaseEntity {
 
     private Integer yCoordinate;
 
-    @Column(columnDefinition = "varchar(5) default '0'")
-    private boolean kakaoCheck;
+	private String provider;
+	private String providerId;
   
 	  @Builder.Default
 	  @OneToMany(mappedBy = "member")
@@ -80,5 +80,6 @@ public class Member extends BaseEntity {
 	public void addChildren(Children children) {
 		this.children.add(children);
 	}
+
 
 }
