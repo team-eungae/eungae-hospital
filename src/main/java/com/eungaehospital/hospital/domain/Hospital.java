@@ -90,12 +90,6 @@ public class Hospital extends BaseEntity {
 	private String address;
 
 	// @Column(nullable = false)
-	private String addressDetail;
-
-	// @Column(nullable = false)
-	private String businessRegistration;
-
-	// @Column(nullable = false)
 	private double xCoordinate;
 
 	// @Column(nullable = false)
@@ -116,8 +110,6 @@ public class Hospital extends BaseEntity {
 			.contact(contact)
 			.deposit(deposit)
 			.address(address)
-			.addressDetail(addressDetail)
-			.businessRegistration(businessRegistration)
 			.xCoordinate(xCoordinate)
 			.yCoordinate(yCoordinate)
 			.hospitalSchedule(hospitalSchedule)
