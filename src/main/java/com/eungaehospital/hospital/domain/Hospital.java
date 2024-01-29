@@ -139,10 +139,11 @@ public class Hospital extends BaseEntity {
 		this.hospitalImageList.add(hospitalImage);
 	}
 
-	public void updateHospitalInfo(String name, String contact, String notice, String address) {
+	public void updateHospitalInfo(String name, String contact, String notice, String address, int deposit) {
 		this.name = name;
 		this.contact = contact;
 		this.notice = notice;
 		this.address = address;
+		this.deposit = deposit;
 	}
 }

@@ -38,7 +38,8 @@ public class HospitalService {
 		hospital.updateHospitalInfo(hospitalUpdateRequestDto.getName(),
 			hospitalUpdateRequestDto.getContact(),
 			hospitalUpdateRequestDto.getNotice(),
-			hospitalUpdateRequestDto.getAddress());
+			hospitalUpdateRequestDto.getAddress(),
+			hospitalUpdateRequestDto.getDeposit());
 	}
 
 	@Transactional(readOnly = true)
