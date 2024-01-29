@@ -17,7 +17,7 @@ public class AppointmentController {
 
 	@GetMapping("/appointments/{appointmentSeq}/status/{status}")
 	public String VisitedAppointment(@PathVariable Long appointmentSeq, @PathVariable String status) {
-		appointmentService.changeAppointmentStatusToDiagnosis(appointmentSeq, status);
+		appointmentService.changeAppointmentStatus(appointmentSeq, status);
 
 		return "redirect:/hospital/main";
 	}

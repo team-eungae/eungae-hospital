@@ -25,7 +25,7 @@ public class AppointmentService {
 	private final HospitalRepository hospitalRepository;
 
 	@Transactional(readOnly = true)
-	public List<AppointmentResponseDto> getAppointmentList(String hospitalId, String selectDate) {
+	public List<AppointmentResponseDto> getAppointmentListBySelectedDate(String hospitalId, String selectDate) {
 		Long hospitalSeq = hospitalRepository.findByHospitalId(hospitalId).get().getHospitalSeq();
 
 		LocalDate appointmentDate = convertStringToLocalDate(selectDate);
@@ -43,7 +43,7 @@ public class AppointmentService {
 	}
 
 	@Transactional
-	public void changeAppointmentStatusToDiagnosis(Long appointmentSeq, String status) {
+	public void changeAppointmentStatus(Long appointmentSeq, String status) {
 
 		Appointment appointment = appointmentRepository.findById(appointmentSeq)
 			.orElseThrow(() -> new IllegalStateException(
