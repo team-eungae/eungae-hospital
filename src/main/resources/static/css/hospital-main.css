@@ -259,3 +259,40 @@ button {
 .modal-page {
     margin-top: 2.5em;
 }
+
+/* 예약 상세정보 모달창  */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed; /* 화면에 고정 */
+    z-index: 1; /* 다른 요소 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 전체 너비 */
+    height: 100%; /* 전체 높이 */
+    overflow: auto; /* 스크롤바 추가 */
+    background-color: rgba(0,0,0,0.4); /* 반투명 배경 */
+}
+
+/* 모달 내용 스타일 */
+.modal-contents {
+    background-color: #fefefe;
+    margin: 15% auto; /* 중앙에 위치 */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* 너비 */
+}
+
+/* 닫기 버튼 스타일 */
+.closing-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closing-button:hover,
+.closing-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
