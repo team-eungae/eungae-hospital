@@ -37,3 +37,5 @@ $('.doctor-on-off').click(function () {
         }
     })
 })
+
+

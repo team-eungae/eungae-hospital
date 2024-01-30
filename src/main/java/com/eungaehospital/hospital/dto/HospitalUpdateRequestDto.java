@@ -8,6 +8,7 @@ import lombok.Data;
 public class HospitalUpdateRequestDto {
 	private Long hospitalSeq;
 	private String hospitalId;
+	private int deposit;
 	private String name;
 	private String notice;
 	private String contact; //연락처

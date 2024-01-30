@@ -17,6 +17,9 @@ public class AppointmentResponseDto {
 	private String doctor;
 	private String note;
 	private String status;
+	private String guardianName;
+	private String phoneNumber;
+	private String profileImage;
 
 	public static AppointmentResponseDto toDto(Appointment appointment) {
 		return AppointmentResponseDto.builder()
@@ -28,6 +31,9 @@ public class AppointmentResponseDto {
 			.doctor(appointment.getDoctor().getName())
 			.note(appointment.getNote())
 			.status(String.valueOf(appointment.getStatus()))
+			.guardianName(appointment.getMember().getName())
+			.phoneNumber(appointment.getMember().getPhoneNumber())
+			.profileImage(appointment.getChildren().getProfileImage())
 			.build();
 	}
 }
