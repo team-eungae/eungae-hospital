@@ -254,12 +254,29 @@ button {
     width: 90%;
     border-radius: 6px;
     height: 2.6rem;
+    padding-left: 12px;
+    font-size: small;
+}
+
+.modal-page__input.col.gender {
+    display: flex;
+}
+.boy {
+    margin-right: 20px;
 }
 
 .modal-page {
     margin-top: 2.5em;
 }
 
+.form-select {
+    border: solid 1px #ccc;
+    width: 90%;
+    border-radius: 6px;
+    height: 2.6rem;
+    padding-left: 12px;
+    font-size: small;
+  
 /* 예약 상세정보 모달창  */
 .modal {
     display: none; /* 기본적으로 숨김 */

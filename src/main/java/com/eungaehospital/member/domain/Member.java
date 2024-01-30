@@ -1,25 +1,13 @@
 package com.eungaehospital.member.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hibernate.annotations.DynamicInsert;
-
 import com.eungaehospital.appointment.domain.Appointment;
 import com.eungaehospital.base.BaseEntity;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
 
 @DynamicInsert
 @AllArgsConstructor
@@ -52,7 +40,6 @@ public class Member extends BaseEntity {
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
     private String addressDetail;
 
     @Column(nullable = false)
@@ -62,24 +49,22 @@ public class Member extends BaseEntity {
 
     private Integer yCoordinate;
 
-	private String provider;
-	private String providerId;
-  
-	  @Builder.Default
-	  @OneToMany(mappedBy = "member")
-	  private List<Children> children = new ArrayList<>();
+    private String provider;
+    private String providerId;
 
-	  @Builder.Default
-	  @OneToMany(mappedBy = "member")
-	  private List<Appointment> appointments = new ArrayList<>();
-  
+    @Builder.Default
+    @OneToMany(mappedBy = "member")
+    private List<Children> children = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "member")
+    private List<Appointment> appointments = new ArrayList<>();
+
     @Builder.Default
     @OneToMany(mappedBy = "member")
     private List<FavoritesHospital> favoritesHospitals = new ArrayList<>();
 
-	public void addChildren(Children children) {
-		this.children.add(children);
-	}
-
-
+    public void addChildren(Children children) {
+        this.children.add(children);
+    }
 }

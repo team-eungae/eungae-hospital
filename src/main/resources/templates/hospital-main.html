@@ -35,20 +35,17 @@
         <div id="modalContent">
             <h5>현장 등록 환자</h5>
             <hr/>
-            <div class="modal-info">
-                <form action="">
+            <form th:action="@{/hospital/appointments}" th:object="${appointmentRequestDto}" method="post">
+                <div class="modal-info">
+
+
                     <div class="modal-page">
                         <div class="modal-page-content">
                             <div class="modal-page-sub__title col-3">
                                 이름
                             </div>
                             <div class="modal-page__input col">
-                                <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        required
-                                />
+                                <input type="text" id="name" name="name" placeholder="이름을 입력하세요." required>
                             </div>
                         </div>
                         <div class="modal-page-content">
@@ -60,21 +57,18 @@
                                         type="text"
                                         id="birth"
                                         name="birth"
+                                        placeholder="생년월일을 입력하세요. ex)20240101"
                                         required
                                 />
                             </div>
                         </div>
                         <div class="modal-page-content">
                             <div class="modal-page-sub__title col-3">
-                                전화번호
+                                성별
                             </div>
-                            <div class="modal-page__input col">
-                                <input
-                                        type="text"
-                                        id="tel"
-                                        name="tel"
-                                        required
-                                />
+                            <div class="modal-page__input col gender">
+                                <div class="boy"><input type="radio" name="gender" value="male" checked>남자</div>
+                                <div class="girl"><input type="radio" name="gender" value="female">여자</div>
                             </div>
                         </div>
                         <div class="modal-page-content">
@@ -84,32 +78,32 @@
                             <div class="modal-page__input col">
                                 <input
                                         type="text"
-                                        id="symptom"
-                                        name="symptom"
+                                        id="note"
+                                        name="note"
+                                        placeholder="증상을 입력하세요."
                                         required
                                 />
                             </div>
                         </div>
                         <div class="modal-page-content">
                             <div class="modal-page-sub__title col-3">
-                                주소
+                                담당의사
                             </div>
                             <div class="modal-page__input col">
-                                <input
-                                        type="text"
-                                        id="addr"
-                                        name="addr"
-                                        required
-                                />
+                                <select class="form-select" name="doctorSeq">
+                                    <option value="" >의사 선택</option>
+                                    <option th:each="doctor:${doctorList}" th:value="${doctor.doctorSeq}"
+                                            th:text="${doctor.name}"></option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-send-btn">
-                <button id="modalCloseButton">닫기</button>
-                <button id="visited-send">등록</button>
-            </div>
+                </div>
+                <div class="modal-send-btn">
+                    <button id="modalCloseButton">닫기</button>
+                    <button type="submit" id="visited-send">등록</button>
+                </div>
+            </form>
         </div>
     </div>
 
