@@ -344,17 +344,26 @@ button {
 }
 .modal-content {
     display: flex;
-    justify-content: space-between; /* 양 끝 정렬, 중간에 공간 */
+    flex-direction: row; /* 수평 정렬 */
+    justify-content: space-between;
+    width: 600px;
 }
 
 .modal-info {
     flex-grow: 1; /* 텍스트 영역 확장 */
-    padding-right: 20px; /* 이미지와의 간격 */
+    text-align: left;/* 이미지와의 간격 */
+}
+.modal-right-section {
+    text-align: right;
 }
 
-.modal-profile-image {
-    flex-shrink: 0; /* 이미지 크기 유지 */
-    max-width: 100px; /* 이미지 최대 크기 */
-    max-height: 100px; /* 이미지 최대 크기 */
-    border-radius: 50%; /* 원형 이미지 */
+#modalProfileImage {
+    width: 120px;
+    height: 123px;
+    object-fit: cover;
+    margin-right:11px;
+}
+.modal-footer{
+    align-self: flex-end; /* 오른쪽 정렬 */
+    margin-top: 168px; /* 상단 콘텐츠와의 간격 조정 */
 }
