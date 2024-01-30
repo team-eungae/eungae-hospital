@@ -127,10 +127,28 @@
         </tr>
         </thead>
         <tbody id="appointment-list-body">
-        <tr class="appointment-record">
+        <tr class="appointment-record" button id="appointments">
+
         </tr>
         </tbody>
     </table>
+    <div id="appointmentDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <div class="modal-info">
+            <p id="modalChildrenName"></p>
+            <p id="modalGuardianName"></p>
+            <p id="modalPhoneNumber"></p>
+            <p id="modalGender"></p>
+            <p id="modalBirthdate"></p>
+            <p id="modalTime"></p>
+            <p id="modalDoctor"></p>
+            <p id="modalNote"></p>
+            </div>
+            <img id="modalProfileImage" src="" alt="Profile Image" style="width: 100px; height: 100px;"/>
+        </div>
+    </div>
 </main>
 <div layout:fragment="hospital_custom_js">
     <script src="/js/hospital-main.js"></script>
