@@ -67,8 +67,8 @@
                                 성별
                             </div>
                             <div class="modal-page__input col gender">
-                                <div class="boy"><input type="radio" name="gender" value="male" checked>남자</div>
-                                <div class="girl"><input type="radio" name="gender" value="female">여자</div>
+                                <div class="boy"><input type="radio" name="gender" value="Male" checked>남자</div>
+                                <div class="girl"><input type="radio" name="gender" value="Female">여자</div>
                             </div>
                         </div>
                         <div class="modal-page-content">
@@ -111,42 +111,21 @@
         <thead>
         <tr>
             <th class="tb-center">순번</th>
-            <th class="tb-center">이름</th>
+            <th class="tb-center">애기이름</th>
             <th class="tb-center">성별</th>
             <th class="tb-center">생년월일</th>
             <th class="tb-center">접수시간</th>
             <th class="tb-center">담당의</th>
-            <th class="tb-center">증상</th>
+            <th class="tb-center">보호자</th>
             <th class="tb-center">방문여부</th>
         </tr>
         </thead>
         <tbody id="appointment-list-body">
-        <tr class="appointment-record" button id="appointments">
+        <tr class="appointment-record" id="appointments">
 
         </tr>
         </tbody>
     </table>
-    <div id="appointmentDetailsModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-info">
-                <p id="modalChildrenName"></p>
-                <p id="modalGuardianName"></p>
-                <p id="modalPhoneNumber"></p>
-                <p id="modalGender"></p>
-                <p id="modalBirthdate"></p>
-                <p id="modalTime"></p>
-                <p id="modalDoctor"></p>
-                <p id="modalNote"></p>
-            </div>
-            <div class="modal-right-section">
-                <img id="modalProfileImage" src="" alt="Profile Image"/>
-                <span class="modal-footer">
-                    © 2023 Eungae
-                </span>
-            </div>
-        </div>
-    </div>
 </main>
 <div layout:fragment="hospital_custom_js">
     <script src="/js/hospital-main.js"></script>
