@@ -1,7 +1,6 @@
 let fileNo = 0;
 let filesArr = new Array();
 
-/* 첨부파일 추가 */
 function addFile(obj) {
     let maxFileCnt = 3;
     let attFileCnt = document.querySelectorAll(".filebox").length;
@@ -11,7 +10,7 @@ function addFile(obj) {
     if (curFileCnt > remainFileCnt) {
         alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
 
-        document.getElementById('myForm').reset();
+        $('#hospitalImage').val('');
     }
 
     // 파일 리스트를 담을 변수
@@ -27,29 +26,24 @@ function addFile(obj) {
             reader.onload = function (e) {
                 // 이미지 파일인 경우에만 미리보기 추가
                 if (file.type.match("image.*")) {
-                    let htmlData =
-                        '<div id="file' + fileNo + '" class="filebox">';
-                    htmlData +=
-                        '   <img src="' +
-                        e.target.result +
-                        '" alt="file-preview" />';
-                    htmlData += '   <p class="name">' + file.name + "</p>";
-                    htmlData +=
-                        '   <a class="delete-btn" onclick="deleteFile(' +
-                        fileNo +
-                        ');"><i class="far fa-minus-square"></i></a>';
-                    htmlData += "</div>";
+                    let htmlData =`<div id="file${fileNo}" class="filebox">
+                                                <img src="${e.target.result} alt="file-preview" />
+                                                <p class="name">${file.name}</p>
+                                                <a class="delete-btn" onclick="deleteFile(${fileNo});">
+                                                    <i class="far fa-minus-square"></i>
+                                                </a>
+                                            </div>`;
+
                     $(".file-list").append(htmlData);
                 }
-
                 // 파일 배열에 담기
                 filesArr.push(file);
                 fileNo++;
             };
             reader.readAsDataURL(file);
         }
+        $('#hospitalImage').val('');
     }
-
     if (fileList.children.length > 0) {
         selectedFilesLabel.style.display = "none";
     } else {
@@ -58,27 +52,29 @@ function addFile(obj) {
 
 }
 
-/* 첨부파일 검증 */
 function validation(obj) {
     const fileTypes = ["image/jpeg", "image/png", "image/bmp", "image/jpg"];
+
     if (obj.name.length > 100) {
         alert("파일명이 100자 이상인 파일은 제외되었습니다.");
         return false;
-    } else if (obj.size > 100 * 1024 * 1024) {
+    }
+    if (obj.size > 100 * 1024 * 1024) {
         alert("최대 파일 용량인 100MB를 초과한 파일은 제외되었습니다.");
         return false;
-    } else if (obj.name.lastIndexOf(".") == -1) {
+    }
+    if (obj.name.lastIndexOf(".") == -1) {
         alert("확장자가 없는 파일은 제외되었습니다.");
         return false;
-    } else if (!fileTypes.includes(obj.type)) {
+    }
+    if (!fileTypes.includes(obj.type)) {
         alert("첨부가 불가능한 파일은 제외되었습니다.");
         return false;
-    } else {
-        return true;
     }
+
+    return true;
 }
 
-/* 첨부파일 삭제 */
 function deleteFile(num) {
     document.querySelector("#file" + num).remove();
     filesArr[num].is_delete = true;

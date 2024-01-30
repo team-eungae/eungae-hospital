@@ -49,11 +49,7 @@ public class AppointmentService {
 			.orElseThrow(() -> new IllegalStateException(
 				"Cannot find Appointment. appointmentSeq = {%d}".formatted(appointmentSeq)));
 
-		if (status.equals("visit")) {
-			appointment.setStatus(AppointmentStatus.DIAGNOSIS);
-		} else if (status.equals("restore")) {
-			appointment.setStatus(AppointmentStatus.APPOINTMENT);
-		}
+		appointment.setStatus(status.equals("visit") ? AppointmentStatus.DIAGNOSIS : AppointmentStatus.APPOINTMENT);
 	}
 
 	private LocalDate convertStringToLocalDate(String date) {
