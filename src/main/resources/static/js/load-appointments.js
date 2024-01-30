@@ -93,6 +93,7 @@ function showModal(appointment) {
     document.getElementById('modalTime').innerHTML = '<strong>시간</strong>: ' + formatTime(appointment.appointmentHourMinute);
     document.getElementById('modalDoctor').innerHTML = '<strong>담당의</strong>: ' + appointment.doctor;
     document.getElementById('modalNote').innerHTML = '<strong>증상</strong>: ' + appointment.note;
+    
 
     // 모달을 표시합니다.
     document.getElementById('appointmentDetailsModal').style.display = 'block';
