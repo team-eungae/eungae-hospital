@@ -27,7 +27,7 @@ function addFile(obj) {
                 // 이미지 파일인 경우에만 미리보기 추가
                 if (file.type.match("image.*")) {
                     let htmlData =`<div id="file${fileNo}" class="filebox">
-                                                <img src="${e.target.result} alt="file-preview" />
+                                                <img src="${e.target.result}" alt="file-preview" />
                                                 <p class="name">${file.name}</p>
                                                 <a class="delete-btn" onclick="deleteFile(${fileNo});">
                                                     <i class="far fa-minus-square"></i>
@@ -42,7 +42,6 @@ function addFile(obj) {
             };
             reader.readAsDataURL(file);
         }
-        $('#hospitalImage').val('');
     }
     if (fileList.children.length > 0) {
         selectedFilesLabel.style.display = "none";
@@ -50,6 +49,7 @@ function addFile(obj) {
         selectedFilesLabel.style.display = "block";
     }
 
+    $('#hospitalImage').val('');
 }
 
 function validation(obj) {
