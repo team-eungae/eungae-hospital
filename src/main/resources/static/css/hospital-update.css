@@ -108,7 +108,7 @@ main {
     margin-top: 10px;
     display: inline-block;
 }
-.insert .file-list .filebox .delete i {
+.insert .file-list .filebox .delete-btn i {
     color: #0d0f36;
     margin-left: 5px;
 }
@@ -121,3 +121,5 @@ main {
     padding: 5px;
     border: 2px solid #b0b0b0;
 }
+
+

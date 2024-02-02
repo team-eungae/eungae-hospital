@@ -25,7 +25,7 @@ public class AppointmentApiController {
 		@AuthenticationPrincipal UserDetails userDetails,
 		String selectDate
 	) {
-		return appointmentService.getAppointmentListBy(
+		return appointmentService.getAppointmentListBySelectedDate(
 			userDetails.getUsername(), selectDate);
 	}
 

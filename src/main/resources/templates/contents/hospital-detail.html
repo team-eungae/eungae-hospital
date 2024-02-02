@@ -39,6 +39,14 @@
             </div>
             <div class="hospital-update-content">
                 <div class="hospital-update-sub__title col-3">
+                    예약금
+                </div>
+                <div class="hospital-update__input col">
+                    <input type="text" id="deposit" name="deposit" th:value="${#numbers.formatDecimal(hospital.deposit, 0, 'COMMA', 0, 'POINT')}+ '원'" disabled>
+                </div>
+            </div>
+            <div class="hospital-update-content">
+                <div class="hospital-update-sub__title col-3">
                     한 줄 소개
                 </div>
                 <div class="hospital-update__input col">
@@ -59,18 +67,18 @@
                     병원 이미지
                 </div>
                 <div class="hospital-update__input col main-image">
-                    <div class="hospital-main-image" th:unless="${hospital.hospitalImageResponseDtoList eq null}" th:each="hospitalImage:${hospital.hospitalImageResponseDtoList}">
+                    <div class="hospital-main-image" th:unless="${hospital.hospitalImageResponseDtoList eq null}"
+                         th:each="hospitalImage:${hospital.hospitalImageResponseDtoList}">
                         <img th:src="@{/images/}+${hospitalImage.storeFileName}">
                     </div>
                 </div>
             </div>
         </div>
         <div class="hospital-update-content">
-            <button
-                    type="button"
-                    id="btn-update"
-                    class="my-page-content save"
-            >
+            <button type="button" id="btn-image-update" class="my-page-content save">
+                <a th:href="@{/hospital/images/form}">이미지 수정</a>
+            </button>
+            <button type="button" id="btn-update" class="my-page-content save">
                 <a th:href="@{/hospital/profile/form}">정보 수정</a>
             </button>
         </div>
