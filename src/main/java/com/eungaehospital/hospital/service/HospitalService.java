@@ -9,6 +9,7 @@ import com.eungaehospital.doctor.repository.DoctorRepository;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.eungaehospital.file.ResultFileStore;
 import com.eungaehospital.hospital.domain.Hospital;
 import com.eungaehospital.hospital.domain.HospitalImage;
@@ -39,7 +40,7 @@ public class HospitalService {
 	public HospitalViewResponseDto getHospitalByHospitalId(String hospitalId) {
 		Hospital hospital = hospitalRepository.findByHospitalId(hospitalId).get();
 		List<HospitalImage> hospitalImageList = hospitalImageRepository.findAllByHospital(hospital);
-    
+
 		return HospitalViewResponseDto.toDto(hospital, hospitalImageList);
 	}
 
@@ -81,13 +82,13 @@ public class HospitalService {
 		}
 	}
 
-	private void updateHospitalCache(Hospital hospital){
+	private void updateHospitalCache(Hospital hospital) {
 		HospitalSearchResponseDto hospitalDto = HospitalSearchResponseDto.toDto(hospital);
 		try {
-			hashOperations.put(HOSPITAL_HASH_KEY, hospitalDto.getHospitalSeq()+"",
+			hashOperations.put(HOSPITAL_HASH_KEY, hospitalDto.getHospitalSeq() + "",
 				objectMapper.writeValueAsString(hospitalDto));
-		} catch (JsonProcessingException e){
-			log.error("{}",e.getMessage());
+		} catch (JsonProcessingException e) {
+			log.error("{}", e.getMessage());
 		}
 	}
 }
