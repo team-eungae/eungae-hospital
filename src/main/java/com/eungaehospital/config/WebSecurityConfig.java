@@ -23,8 +23,6 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 public class WebSecurityConfig {
 
-	private final HospitalUserDetailsService hospitalUserDetailsService;
-
 	// 시큐리티 비활성화
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
@@ -34,7 +32,8 @@ public class WebSecurityConfig {
 			.requestMatchers(new AntPathRequestMatcher("/css/**"))
 			.requestMatchers(new AntPathRequestMatcher("/js/**"))
 			.requestMatchers(new AntPathRequestMatcher("/img/**"))
-			.requestMatchers(new AntPathRequestMatcher("/lib/**"));
+			.requestMatchers(new AntPathRequestMatcher("/lib/**"))
+			.requestMatchers(new AntPathRequestMatcher("/error"));
 	}
 
 	@Bean

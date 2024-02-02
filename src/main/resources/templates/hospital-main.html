@@ -11,10 +11,20 @@
 <main layout:fragment="hospital_content">
     <h3>의사 선생님 출근 목록</h3>
     <div class="doctor-commute-container">
-        <button class="doctor-on-off on" th:each="doctor:${doctorList}" onclick="toggleStatus(this)">
-            <img src="/img/doctor.jpeg">
+        <button class="doctor-on-off" th:each="doctor:${doctorList}" th:id="'doctor-on-off-' + ${doctor.doctorSeq}">
+            <input type="hidden" class="doctorSeq" th:value="${doctor.doctorSeq}">
+            <img th:if="${doctor.doctorProfileImage eq null}" th:src="@{/img/doctor.jpeg}"
+                 alt="Basic Doctor Image"/>
+            <img th:unless="${doctor.doctorProfileImage eq null}"
+                 th:src="@{/images/} + ${doctor.doctorProfileImage}"
+                 alt="Doctor Image"/>
             <span class="doctor-img-text" th:text="${doctor.name}"></span>
-            <span class="badge bg-dark text-light">OFF</span>
+            <div class="doctor-status" th:id="'doctor-status-' + ${doctor.doctorSeq}">
+                <span class="badge bg-dark text-light" th:text="${doctor.status}"
+                      th:if="${doctor.status == T(com.eungaehospital.doctor.domain.DoctorStatus).OFF}"></span>
+                <span class="badge bg-green text-light" th:text="${doctor.status}"
+                      th:unless="${doctor.status == T(com.eungaehospital.doctor.domain.DoctorStatus).OFF}"></span>
+            </div>
         </button>
     </div>
 
@@ -25,20 +35,17 @@
         <div id="modalContent">
             <h5>현장 등록 환자</h5>
             <hr/>
-            <div class="modal-info">
-                <form action="">
+            <form th:action="@{/hospital/appointments}" th:object="${appointmentRequestDto}" method="post">
+                <div class="modal-info">
+
+
                     <div class="modal-page">
                         <div class="modal-page-content">
                             <div class="modal-page-sub__title col-3">
                                 이름
                             </div>
                             <div class="modal-page__input col">
-                                <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        required
-                                />
+                                <input type="text" id="name" name="name" placeholder="이름을 입력하세요." required>
                             </div>
                         </div>
                         <div class="modal-page-content">
@@ -50,21 +57,18 @@
                                         type="text"
                                         id="birth"
                                         name="birth"
+                                        placeholder="생년월일을 입력하세요. ex)20240101"
                                         required
                                 />
                             </div>
                         </div>
                         <div class="modal-page-content">
                             <div class="modal-page-sub__title col-3">
-                                전화번호
+                                성별
                             </div>
-                            <div class="modal-page__input col">
-                                <input
-                                        type="text"
-                                        id="tel"
-                                        name="tel"
-                                        required
-                                />
+                            <div class="modal-page__input col gender">
+                                <div class="boy"><input type="radio" name="gender" value="Male" checked>남자</div>
+                                <div class="girl"><input type="radio" name="gender" value="Female">여자</div>
                             </div>
                         </div>
                         <div class="modal-page-content">
@@ -74,32 +78,32 @@
                             <div class="modal-page__input col">
                                 <input
                                         type="text"
-                                        id="symptom"
-                                        name="symptom"
+                                        id="note"
+                                        name="note"
+                                        placeholder="증상을 입력하세요."
                                         required
                                 />
                             </div>
                         </div>
                         <div class="modal-page-content">
                             <div class="modal-page-sub__title col-3">
-                                주소
+                                담당의사
                             </div>
                             <div class="modal-page__input col">
-                                <input
-                                        type="text"
-                                        id="addr"
-                                        name="addr"
-                                        required
-                                />
+                                <select class="form-select" name="doctorSeq">
+                                    <option value="" >의사 선택</option>
+                                    <option th:each="doctor:${doctorList}" th:value="${doctor.doctorSeq}"
+                                            th:text="${doctor.name}"></option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-send-btn">
-                <button id="modalCloseButton">닫기</button>
-                <button id="visited-send">등록</button>
-            </div>
+                </div>
+                <div class="modal-send-btn">
+                    <button id="modalCloseButton">닫기</button>
+                    <button type="submit" id="visited-send">등록</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -107,16 +111,18 @@
         <thead>
         <tr>
             <th class="tb-center">순번</th>
-            <th class="tb-center">이름</th>
+            <th class="tb-center">애기이름</th>
+            <th class="tb-center">성별</th>
             <th class="tb-center">생년월일</th>
             <th class="tb-center">접수시간</th>
             <th class="tb-center">담당의</th>
-            <th class="tb-center">증상</th>
+            <th class="tb-center">보호자</th>
             <th class="tb-center">방문여부</th>
         </tr>
         </thead>
         <tbody id="appointment-list-body">
-        <tr class="appointment-record">
+        <tr class="appointment-record" id="appointments">
+
         </tr>
         </tbody>
     </table>

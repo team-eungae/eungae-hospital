@@ -2,7 +2,6 @@ package com.eungaehospital.security;
 
 import java.util.Optional;
 
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,10 +26,7 @@ public class HospitalUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException(hospitalId);
 		}
 
-		return User.builder()
-			.username(hospitalUser.get().getHospitalId())
-			.password(hospitalUser.get().getPassword())
-			.build();
+		return new HospitalUserDetails(hospitalUser.get());
 	}
 
 }

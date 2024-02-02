@@ -1,5 +1,7 @@
 package com.eungaehospital.hospital.domain;
 
+import org.hibernate.annotations.Where;
+
 import com.eungaehospital.base.BaseEntity;
 
 import jakarta.persistence.Column;
@@ -22,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @Table(name = "hospital_image")
+@Where(clause = "deleteYN = 'N'")
 @Entity
 public class HospitalImage extends BaseEntity {
 
