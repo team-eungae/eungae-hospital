@@ -18,8 +18,13 @@ import com.eungaehospital.hospital.dto.HospitalUpdateRequestDto;
 import com.eungaehospital.hospital.dto.HospitalViewResponseDto;
 import com.eungaehospital.hospital.repository.HospitalImageRepository;
 import com.eungaehospital.hospital.repository.HospitalRepository;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class HospitalService {
@@ -28,6 +33,7 @@ public class HospitalService {
 	private final HospitalRepository hospitalRepository;
 	private final HospitalImageRepository hospitalImageRepository;
 	private final HashOperations<String, String, String> hashOperations;
+	private final ObjectMapper objectMapper;
 
 	@Transactional(readOnly = true)
 	public HospitalViewResponseDto getHospitalByHospitalId(String hospitalId) {
@@ -45,7 +51,7 @@ public class HospitalService {
 			hospitalUpdateRequestDto.getNotice(),
 			hospitalUpdateRequestDto.getAddress(),
 			hospitalUpdateRequestDto.getDeposit());
-		hashOperations.put(HOSPITAL_HASH_KEY,hospital.getHospitalSeq()+"","");
+		updateHospitalCache(hospital);
 	}
 
 	@Transactional(readOnly = true)
@@ -71,8 +77,17 @@ public class HospitalService {
 				hospitalImage.setHospital(hospital);
 				hospitalImageRepository.save(hospitalImage);
 			});
-			hashOperations.put(HOSPITAL_HASH_KEY,hospital.getHospitalSeq()+"");
+			updateHospitalCache(hospital);
 		}
 	}
-  
+
+	private void updateHospitalCache(Hospital hospital){
+		HospitalSearchResponseDto hospitalDto = HospitalSearchResponseDto.toDto(hospital);
+		try {
+			hashOperations.put(HOSPITAL_HASH_KEY, hospitalDto.getHospitalSeq()+"",
+				objectMapper.writeValueAsString(hospitalDto));
+		} catch (JsonProcessingException e){
+			log.error("{}",e.getMessage());
+		}
+	}
 }
