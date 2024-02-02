@@ -66,7 +66,7 @@ td {
 }
 
 td > input {
-    border: 0;
+    border: 1px #0b2e13 solid;
     width: 70%;
     text-align: center;
 }

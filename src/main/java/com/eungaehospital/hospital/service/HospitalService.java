@@ -1,6 +1,7 @@
 package com.eungaehospital.hospital.service;
 
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 import com.eungaehospital.doctor.dto.DoctorResponseDto;
@@ -12,6 +13,7 @@ import com.eungaehospital.file.ResultFileStore;
 import com.eungaehospital.hospital.domain.Hospital;
 import com.eungaehospital.hospital.domain.HospitalImage;
 import com.eungaehospital.hospital.dto.HospitalImageResponseDto;
+import com.eungaehospital.hospital.dto.HospitalScheduleViewDto;
 import com.eungaehospital.hospital.dto.HospitalUpdateRequestDto;
 import com.eungaehospital.hospital.dto.HospitalViewResponseDto;
 import com.eungaehospital.hospital.repository.HospitalImageRepository;
@@ -30,6 +32,20 @@ public class HospitalService {
 		List<HospitalImage> hospitalImageList = hospitalImageRepository.findAllByHospital(hospital);
     
 		return HospitalViewResponseDto.toDto(hospital, hospitalImageList);
+	}
+
+	@Transactional(readOnly = true)
+	public HospitalScheduleViewDto getHospitalSchedule(String hospitalId) {
+		Hospital hospital = hospitalRepository.findWithSchedule(hospitalId)
+			.orElseThrow(() -> new IllegalStateException("Can not found Hospital"));
+		return HospitalScheduleViewDto.toDto(hospital.getHospitalSchedule());
+	}
+
+	@Transactional
+	public void updateHospitalSchedule(String hospitalId, HospitalScheduleViewDto hospitalScheduleViewDto) {
+		Hospital hospital = hospitalRepository.findWithSchedule(hospitalId)
+			.orElseThrow(() -> new IllegalStateException("Can not found Hospital"));
+		hospital.getHospitalSchedule().update(hospitalScheduleViewDto);
 	}
 
 	@Transactional
@@ -67,5 +83,4 @@ public class HospitalService {
 			});
 		}
 	}
-  
 }
