@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 import com.eungaehospital.doctor.dto.DoctorResponseDto;
 import com.eungaehospital.doctor.repository.DoctorRepository;
 
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.eungaehospital.file.ResultFileStore;
 import com.eungaehospital.hospital.domain.Hospital;
 import com.eungaehospital.hospital.domain.HospitalImage;
 import com.eungaehospital.hospital.dto.HospitalImageResponseDto;
+import com.eungaehospital.hospital.dto.HospitalSearchResponseDto;
 import com.eungaehospital.hospital.dto.HospitalUpdateRequestDto;
 import com.eungaehospital.hospital.dto.HospitalViewResponseDto;
 import com.eungaehospital.hospital.repository.HospitalImageRepository;
@@ -21,8 +23,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class HospitalService {
+	private static final String HOSPITAL_HASH_KEY = "hospital";
+
 	private final HospitalRepository hospitalRepository;
 	private final HospitalImageRepository hospitalImageRepository;
+	private final HashOperations<String, String, String> hashOperations;
 
 	@Transactional(readOnly = true)
 	public HospitalViewResponseDto getHospitalByHospitalId(String hospitalId) {
@@ -40,6 +45,7 @@ public class HospitalService {
 			hospitalUpdateRequestDto.getNotice(),
 			hospitalUpdateRequestDto.getAddress(),
 			hospitalUpdateRequestDto.getDeposit());
+		hashOperations.put(HOSPITAL_HASH_KEY,hospital.getHospitalSeq()+"","");
 	}
 
 	@Transactional(readOnly = true)
@@ -59,12 +65,13 @@ public class HospitalService {
 		if (!resultFileStores.isEmpty()) {
 			List<HospitalImage> newHospitalImageList = resultFileStores.stream()
 				.map(ResultFileStore::toEntity)
-				.collect(Collectors.toList());
+				.toList();
 
-			newHospitalImageList.stream().forEach(hospitalImage -> {
+			newHospitalImageList.forEach(hospitalImage -> {
 				hospitalImage.setHospital(hospital);
 				hospitalImageRepository.save(hospitalImage);
 			});
+			hashOperations.put(HOSPITAL_HASH_KEY,hospital.getHospitalSeq()+"");
 		}
 	}
   
