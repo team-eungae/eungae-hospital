@@ -1,6 +1,7 @@
 package com.eungaehospital.hospital.domain;
 
 import com.eungaehospital.base.BaseEntity;
+import com.eungaehospital.hospital.dto.HospitalScheduleViewDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -82,6 +83,21 @@ public class HospitalSchedule extends BaseEntity {
 	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
 		hospital.setHospitalSchedule(this);
+	}
+
+	public void update(HospitalScheduleViewDto hospitalScheduleViewDto) {
+		monOpen = hospitalScheduleViewDto.getMonOpen();
+		monClose = hospitalScheduleViewDto.getMonClose();
+		thuOpen = hospitalScheduleViewDto.getThuOpen();
+		thuClose = hospitalScheduleViewDto.getThuClose();
+		wedOpen = hospitalScheduleViewDto.getWedOpen();
+		wedClose = hospitalScheduleViewDto.getWedClose();
+		tueOpen = hospitalScheduleViewDto.getTueOpen();
+		tueClose = hospitalScheduleViewDto.getTueClose();
+		friOpen = hospitalScheduleViewDto.getFriOpen();
+		friClose = hospitalScheduleViewDto.getFriClose();
+		lunchHour = hospitalScheduleViewDto.getLunchHour();
+		lunchEndHour = hospitalScheduleViewDto.getLunchEndHour();
 	}
 
 }
