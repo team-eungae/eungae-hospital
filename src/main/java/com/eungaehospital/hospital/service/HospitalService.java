@@ -7,30 +7,42 @@ import java.util.stream.Collectors;
 import com.eungaehospital.doctor.dto.DoctorResponseDto;
 import com.eungaehospital.doctor.repository.DoctorRepository;
 
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.eungaehospital.file.ResultFileStore;
 import com.eungaehospital.hospital.domain.Hospital;
 import com.eungaehospital.hospital.domain.HospitalImage;
 import com.eungaehospital.hospital.dto.HospitalImageResponseDto;
+import com.eungaehospital.hospital.dto.HospitalSearchResponseDto;
 import com.eungaehospital.hospital.dto.HospitalScheduleViewDto;
 import com.eungaehospital.hospital.dto.HospitalUpdateRequestDto;
 import com.eungaehospital.hospital.dto.HospitalViewResponseDto;
 import com.eungaehospital.hospital.repository.HospitalImageRepository;
 import com.eungaehospital.hospital.repository.HospitalRepository;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class HospitalService {
+	private static final String HOSPITAL_HASH_KEY = "hospital";
+
 	private final HospitalRepository hospitalRepository;
 	private final HospitalImageRepository hospitalImageRepository;
+	private final HashOperations<String, String, String> hashOperations;
+	private final ObjectMapper objectMapper;
 
 	@Transactional(readOnly = true)
 	public HospitalViewResponseDto getHospitalByHospitalId(String hospitalId) {
 		Hospital hospital = hospitalRepository.findByHospitalId(hospitalId).get();
 		List<HospitalImage> hospitalImageList = hospitalImageRepository.findAllByHospital(hospital);
-    
+
 		return HospitalViewResponseDto.toDto(hospital, hospitalImageList);
 	}
 
@@ -56,6 +68,7 @@ public class HospitalService {
 			hospitalUpdateRequestDto.getNotice(),
 			hospitalUpdateRequestDto.getAddress(),
 			hospitalUpdateRequestDto.getDeposit());
+		updateHospitalCache(hospital);
 	}
 
 	@Transactional(readOnly = true)
@@ -75,12 +88,23 @@ public class HospitalService {
 		if (!resultFileStores.isEmpty()) {
 			List<HospitalImage> newHospitalImageList = resultFileStores.stream()
 				.map(ResultFileStore::toEntity)
-				.collect(Collectors.toList());
+				.toList();
 
-			newHospitalImageList.stream().forEach(hospitalImage -> {
+			newHospitalImageList.forEach(hospitalImage -> {
 				hospitalImage.setHospital(hospital);
 				hospitalImageRepository.save(hospitalImage);
 			});
+			updateHospitalCache(hospital);
+		}
+	}
+
+	private void updateHospitalCache(Hospital hospital) {
+		HospitalSearchResponseDto hospitalDto = HospitalSearchResponseDto.toDto(hospital);
+		try {
+			hashOperations.put(HOSPITAL_HASH_KEY, hospitalDto.getHospitalSeq() + "",
+				objectMapper.writeValueAsString(hospitalDto));
+		} catch (JsonProcessingException e) {
+			log.error("{}", e.getMessage());
 		}
 	}
 }
