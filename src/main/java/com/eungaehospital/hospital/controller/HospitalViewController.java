@@ -105,6 +105,7 @@ public class HospitalViewController {
 	public String updateHospitalScheduleForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
 		HospitalScheduleViewDto hospitalScheduleDto = hospitalService.getHospitalSchedule(
 			userDetails.getUsername());
+		System.out.println("hospitalScheduleDto = " + hospitalScheduleDto);
 		model.addAttribute("hospitalScheduleViewDto", hospitalScheduleDto);
 		model.addAttribute("hospitalResponseScheduleDto", HospitalScheduleViewDto.builder().build());
 		return "contents/hospital-schedule-update";
