@@ -96,6 +96,10 @@ public class HospitalSchedule extends BaseEntity {
 		tueClose = hospitalScheduleViewDto.getTueClose();
 		friOpen = hospitalScheduleViewDto.getFriOpen();
 		friClose = hospitalScheduleViewDto.getFriClose();
+		satOpen = hospitalScheduleViewDto.getSatOpen();
+		satClose = hospitalScheduleViewDto.getSatClose();
+		sunOpen = hospitalScheduleViewDto.getSunOpen();
+		sunClose = hospitalScheduleViewDto.getSunClose();
 		lunchHour = hospitalScheduleViewDto.getLunchHour();
 		lunchEndHour = hospitalScheduleViewDto.getLunchEndHour();
 	}
